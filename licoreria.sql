@@ -165,6 +165,19 @@ CREATE TABLE `vehiculo` (
   `f_soat` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE `reclamos` (
+  `nom` varchar(40) NOT NULL,
+  `dni` varchar(8) NOT NULL,
+  `dir` varchar(60) NOT NULL,
+  `telef` int(11) NOT NULL,
+  `correo` varchar(40) NOT NULL,
+  `tipo` varchar(20) NOT NULL,
+  `descrip` varchar(70) NOT NULL,
+  `solucion` varchar(70) NOT NULL,
+  `fecha` date NOT NULL,
+  `hora` time NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 --
 -- Volcado de datos para la tabla `vehiculo`
 --
