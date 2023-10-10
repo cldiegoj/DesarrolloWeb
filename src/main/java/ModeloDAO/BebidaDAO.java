@@ -17,7 +17,7 @@ import util.MySQLConexion;
  * @author LENOVO
  */
 public class BebidaDAO {
-    public List<Bebidas> consulta(){
+    public List<Bebidas> listado(){
      Connection cn=MySQLConexion.getConexion();
      String sql="select * from bebida";
      List<Bebidas> lista=new ArrayList();

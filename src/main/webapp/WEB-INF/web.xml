@@ -5,24 +5,16 @@
         <servlet-class>Controlador.ctrlUsuario</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>cntrUsuario</servlet-name>
-        <servlet-class>Controlador.cntrUsuario</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>controlUsuario</servlet-name>
-        <servlet-class>Controlador.controlUsuario</servlet-class>
+        <servlet-name>ctrlPedido</servlet-name>
+        <servlet-class>Controlador.ctrlPedido</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ctrlUsuario</servlet-name>
         <url-pattern>/ctrlUsuario</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>cntrUsuario</servlet-name>
-        <url-pattern>/cntrUsuario</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>controlUsuario</servlet-name>
-        <url-pattern>/controlUsuario</url-pattern>
+        <servlet-name>ctrlPedido</servlet-name>
+        <url-pattern>/ctrlPedido</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

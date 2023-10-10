@@ -13,6 +13,8 @@
 	<header>
             <%@include file="header_footer/Header.jsp" %>
 	</header>
+	
+
 <main class="carrito">
 	<div class="header-content container">
 
@@ -27,16 +29,18 @@
 			        </label>
 			    </div>
 			<!--Fin de Boton-->
-			<?php
-				session_start();
-				$aux=0;
-				if($_SESSION['estado']=="activo"){
 
-					echo '<div class="d-grid gap-2 d-md-flex justify-content-md-end"><a href="../PHP/llamadas/proceso_cerrar.php"><img src="../imagenes/logout.png" width="30px" class="rounded float-end" alt="..."></a></div>';
-				}else{
-					header('location: new.php');
-				}
-            ?>
+                            <%
+                                String n=(String)session.getAttribute("estado");
+                                if(n.equalsIgnoreCase("activo")){
+                                    %> 
+                                    <a href="ctrlUsuario?opc=3"><img src="imagenes/logout.png" width="30px" class="rounded float-end" alt="..."></a>
+                                    <%
+                                }else{
+                                    request.getRequestDispatcher("/Principal.jsp").forward(request, response);
+                                }
+                             %> 
+
 			</div>
 		</div>
 		

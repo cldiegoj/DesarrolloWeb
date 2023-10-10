@@ -35,7 +35,7 @@ public class UsuarioDAO {
     public Usuario  login(String usr,String pas){
         Usuario p=null;
         Connection cn=MySQLConexion.getConexion();
-        String sql="select usrname,pass from usuario where usrname=? and pass=? ";
+        String sql="select usrname,pass,dni from usuario where usrname=? and pass=? ";
         try{
           PreparedStatement st=cn.prepareStatement(sql);
           st.setString(1, usr);
@@ -45,6 +45,7 @@ public class UsuarioDAO {
               p=new Usuario();
               p.setUsrname(rs.getString(1));
               p.setPass(rs.getString(2));
+              p.setDni(rs.getString(3));
           }    
 
         }catch(Exception ex){

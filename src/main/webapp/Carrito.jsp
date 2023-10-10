@@ -12,12 +12,7 @@
 </head>
 <body>
 	<header>
-		
-		<?php
-<!--			require '../PHP/Controlador/conexion.php';-->
-			$conn = conectar();
-			include 'header/header.php';
-        ?>
+
         <%@include file="header_footer/Header.jsp" %>
 	</header>
 
@@ -28,12 +23,17 @@
 
 			<div class="alert alert-success">
 				<a href="Micarrito.jsp" class="badge badge-success">Ver carrito</a>
-				<a href="FiltroVinos.jsp" class="badge badge-success">Buscar chelas!</a>
 
                             <%
-                                //aqui ponemos conedicional de session
-                                //si esta activo aparece el boton de cerrar sesion
-                                //sino redirige a otra pag 
+                                String n=(String)session.getAttribute("estado");
+                                if(n.equalsIgnoreCase("activo")){
+                                    %> 
+                                    <a href="ctrlUsuario?opc=3"><img src="imagenes/logout.png" width="30px" class="rounded float-end" alt="..."></a>
+                                    <%
+                                        String dni=(String)session.getAttribute("dni");
+                                }else{
+                                    request.getRequestDispatcher("/Principal.jsp").forward(request, response);
+                                }
                              %> 
 			</div>
 
@@ -46,17 +46,18 @@
                         %>
 				<div class="col-3">
 					<div class="card">
-						<img title="Título producto" alt="Título" class="card-img-top" src="otros recursos/BEBIDAS/<%=x.getCod()%>.png">
+						<img title="Título producto" alt="Título" class="card-img-top" src="otros recursos/BEBIDAS/<%=x.getFoto()%>">
 						<div>
 							<span><%=x.getNom()%></span>
 							<h5 class="card-title"><%=x.getDescrip()%></h5>
 							<p class="card-text">S/. <%=x.getPrecio()%></p>
-							<!--<form method="post" action="../PHP/llamadas/proceso_pedido.php">-->
+							<form method="post" action="ctrlPedido">
 								<label>Cantidad: </label><input type="text" name="cant">
+                                                                <input type="hidden" name="opc" value="1"> 
 								<input type="hidden" name="cod" value="<%=x.getCod()%>">
-
 								<input type="hidden" name="cost" value="<%=x.getPrecio()%>">
-                                                                <!--n_pedido se forma con "cliente" y con un "autoincrementable"-->
+                                                                <input type="hidden" name="dni" value="<%=(String)session.getAttribute("dni")%>">
+								<!--n_pedido se forma con "cliente" y con un "autoincrementable"-->
 								<!--cliente se obtiene con un session-->
 								<input class="btn btn-primary" type="submit">
 							</form>
@@ -64,9 +65,9 @@
 					</div>
 				</div>
 			<%
-                            }  
+                            }
                         %>					
-			<!---------------------------------- -->
+                        <!---------------------------------- -->
 				
 			</div>
 	</div>

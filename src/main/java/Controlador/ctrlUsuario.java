@@ -2,11 +2,12 @@ package Controlador;
 
 import Modelo.Usuario;
 import ModeloDAO.UsuarioDAO;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 public class ctrlUsuario extends HttpServlet {
 
@@ -17,6 +18,7 @@ public class ctrlUsuario extends HttpServlet {
       int op=Integer.parseInt(request.getParameter("opc"));
       if(op==1)adicionUsuario(request, response);
       if(op==2)login(request, response);
+      if(op==3)cerrar(request,response);
 
     }
     
@@ -32,7 +34,7 @@ public class ctrlUsuario extends HttpServlet {
       u.setDir(request.getParameter("dir"));
       u.setFoto(request.getParameter("foto"));
       obj.adicion(u);
-      String pag="/Carrito.jsp";
+      String pag="/login.jsp";
       request.getRequestDispatcher(pag).forward(request, response);
     }
     
@@ -43,13 +45,27 @@ public class ctrlUsuario extends HttpServlet {
         Usuario p=obj.login(user, clave);
         String pag="";
         if(p==null){
-            request.setAttribute("dato","usuario o Clave no Existe");
             pag="/Principal.jsp";
         }else{
             //Se activa la sesion
+            String dni=p.getDni();
+            HttpSession session=request.getSession();
+            session.setAttribute("usuario",user);
+            session.setAttribute("dni", dni);
+            session.setAttribute("estado", "activo");
             pag="/Carrito.jsp";
         }
         request.getRequestDispatcher(pag).forward(request, response);
+     }
+    
+    protected void cerrar(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session=request.getSession();
+        session.setAttribute("estado", "inactivo");
+        String pag="/Principal.jsp";
+        
+        request.getRequestDispatcher(pag).forward(request, response);
+        
      }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
