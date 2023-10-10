@@ -14,18 +14,18 @@ import util.MySQLConexion;
  * @author Obi_Juan
  */
 public class PedidoDAO {
-    public void adicion(Pedido p){
-     Connection cn=MySQLConexion.getConexion();
-     String sql="INSERT INTO `pedido` VALUES (null,?,?,?,?)";
-     try{
-        PreparedStatement st=cn.prepareStatement(sql);
-         st.setDouble(1, p.getCost_acum());
-         st.setInt(2, p.getCant());
-         st.setString(3, p.getCliente());
-         st.setString(4, p.getBebida());
-         st.executeUpdate();
-     }catch(Exception ex){
-         ex.printStackTrace();
-     }
-     }
+    public void adicion(Pedido p) {
+        Connection cn = MySQLConexion.getConexion();
+        String sql = "INSERT INTO `pedido` VALUES (null,?,?,?,?)";
+        try {
+            PreparedStatement st = cn.prepareStatement(sql);
+            st.setDouble(1, p.getCost_acum());
+            st.setInt(2, p.getCant());
+            st.setString(3, p.getCliente());
+            st.setString(4, p.getBebida());
+            st.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 }
