@@ -17,7 +17,7 @@ import util.MySQLConexion;
  * @author LENOVO
  */
 public class BebidaDAO {
-    public List<Bebidas> listado(){
+    public List<Bebidas> consulta(){
      Connection cn=MySQLConexion.getConexion();
      String sql="select * from bebida";
      List<Bebidas> lista=new ArrayList();
@@ -38,4 +38,47 @@ public class BebidaDAO {
      }
          return lista;
      }
+    
+    public void adicion(Bebidas b) {
+        Connection cn = MySQLConexion.getConexion();
+        String sql = "INSERT INTO BEBIDA VALUES(?,?,?,?,?)";
+        try {
+            PreparedStatement st = cn.prepareStatement(sql);
+            st.setString(1, b.getCod());
+            st.setString(2, b.getNom());
+            st.setString(3, b.getDescrip());
+            st.setDouble(3, b.getPrecio());
+            st.setString(3, b.getFoto());
+            st.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public void actualiza(Bebidas b) {
+        Connection cn = MySQLConexion.getConexion();
+        String sql = "update bebida set nom=?, descrip=?, precio=? where cod=?";
+        try {
+            PreparedStatement st = cn.prepareStatement(sql);
+            st.setString(1, b.getNom());
+            st.setString(2, b.getDescrip());
+            st.setDouble(3, b.getPrecio());
+            st.setString(4, b.getCod());
+            st.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public void anula(String nro) {
+        Connection cn = MySQLConexion.getConexion();
+        String sql = "delete from bebida where cod=?";
+        try {
+            PreparedStatement st = cn.prepareStatement(sql);
+            st.setString(1, nro);
+            st.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 }
