@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>ctrlUsuario</servlet-name>
+        <servlet-class>Controlador.ctrlUsuario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>cntrUsuario</servlet-name>
+        <servlet-class>Controlador.cntrUsuario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>controlUsuario</servlet-name>
+        <servlet-class>Controlador.controlUsuario</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ctrlUsuario</servlet-name>
+        <url-pattern>/ctrlUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cntrUsuario</servlet-name>
+        <url-pattern>/cntrUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>controlUsuario</servlet-name>
+        <url-pattern>/controlUsuario</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>
