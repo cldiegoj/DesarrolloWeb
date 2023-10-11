@@ -2,12 +2,14 @@ package Controlador;
 
 import Modelo.Usuario;
 import ModeloDAO.UsuarioDAO;
+import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class ctrlUsuario extends HttpServlet {
 
@@ -19,6 +21,7 @@ public class ctrlUsuario extends HttpServlet {
       if(op==1)adicionUsuario(request, response);
       if(op==2)login(request, response);
       if(op==3)cerrar(request,response);
+      if(op==4)filtrar(request, response);
 
     }
     
@@ -67,6 +70,15 @@ public class ctrlUsuario extends HttpServlet {
         request.getRequestDispatcher(pag).forward(request, response);
         
      }
+    
+    // FILTRO DE USUARIO 
+      protected void filtrar(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        PrintWriter out=response.getWriter();
+        String con=request.getParameter("consulta");
+        Gson gs=new Gson();
+        out.print(gs.toJson(obj.filtrarUsuario(con)));
+      }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

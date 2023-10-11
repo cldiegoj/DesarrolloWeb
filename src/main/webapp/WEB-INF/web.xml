@@ -8,6 +8,10 @@
         <servlet-name>ctrlPedido</servlet-name>
         <servlet-class>Controlador.ctrlPedido</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ctrlBebidas</servlet-name>
+        <servlet-class>Controlador.ctrlBebidas</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ctrlUsuario</servlet-name>
         <url-pattern>/ctrlUsuario</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>ctrlPedido</servlet-name>
         <url-pattern>/ctrlPedido</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ctrlBebidas</servlet-name>
+        <url-pattern>/ctrlBebidas</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

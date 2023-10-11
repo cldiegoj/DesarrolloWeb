@@ -81,4 +81,41 @@ public class BebidaDAO {
             ex.printStackTrace();
         }
     }
+    
+    // FILTRADO DE BEBIDAS MEDIANTE EL NOMBRE DE LA BEBIDA 
+     public List<Bebidas> filtrarBeb(String id) {
+        List<Bebidas> lis = new ArrayList<>();
+        Connection conn = null;
+
+        try {
+            conn = MySQLConexion.getConexion();
+            String sql = "select cod, nom, descrip, precio from bebida\n" +
+                "where nom like ?";
+ 
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(1, "%"+id+"%");
+            
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+               Bebidas a = new Bebidas();
+                a.setCod(rs.getString(1));
+                a.setNom(rs.getString(2));
+                a.setDescrip(rs.getString(3));
+                a.setPrecio(rs.getDouble(4));
+                lis.add(a);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e2) {
+            }
+        }
+
+        return lis;
+    }
 }

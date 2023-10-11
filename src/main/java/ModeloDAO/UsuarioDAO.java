@@ -53,5 +53,46 @@ public class UsuarioDAO {
         }
          return p;
       }
+    
+    // FILTRO DE USUARIO MEDIANTE DNI O NOMBRE
+     public List<Usuario> filtrarUsuario(String id) {
+        List<Usuario> lis = new ArrayList<>();
+        Connection conn = null;
+
+        try {
+            conn = MySQLConexion.getConexion();
+            String sql = "select dni, apelnom, telef, dir, correo from usuario\n" +
+                "where dni like ? or apelnom like ?";
+            //? =equivale a un parametro 
+            PreparedStatement st = conn.prepareStatement(sql);
+            //relacionar el ? con su variable 
+            st.setString(1, "%"+id+"%");
+            st.setString(2, id+"%");
+            
+            ResultSet rs = st.executeQuery();
+            //llenar el arraylist con la clase entidad
+            while (rs.next()) {
+               Usuario a = new Usuario();
+                a.setDni(rs.getString(1));
+                a.setApelnom(rs.getString(2));
+                a.setTelef(rs.getInt(3));
+                a.setDir(rs.getString(4));
+                a.setCorreo(rs.getString(5));
+                lis.add(a);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e2) {
+            }
+        }
+
+        return lis;
+    }
 
 }
