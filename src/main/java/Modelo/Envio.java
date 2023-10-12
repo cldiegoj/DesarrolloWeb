@@ -10,6 +10,7 @@ public class Envio {
     private Date h_env;
     private Date h_rec;
     private String estado;
+    private String conductor;
 
     public Envio() {
     }
@@ -61,6 +62,15 @@ public class Envio {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
+    public String getConductor() {
+        return conductor;
+    }
+
+    public void setConductor(String conductor) {
+        this.conductor = conductor;
+    }
+    
     
     
 }

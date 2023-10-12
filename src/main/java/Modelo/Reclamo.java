@@ -9,11 +9,20 @@ package Modelo;
  * @author Obi_Juan
  */
 public class Reclamo extends Usuario{
+    int id_reclamo;
     String tipo;
     String descripcion;
     String solucion;
     String fecha;
     String hora;
+
+    public int getId_reclamo() {
+        return id_reclamo;
+    }
+
+    public void setId_reclamo(int id_reclamo) {
+        this.id_reclamo = id_reclamo;
+    }
 
     public String getTipo() {
         return tipo;

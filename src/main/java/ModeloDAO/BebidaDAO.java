@@ -47,8 +47,8 @@ public class BebidaDAO {
             st.setString(1, b.getCod());
             st.setString(2, b.getNom());
             st.setString(3, b.getDescrip());
-            st.setDouble(3, b.getPrecio());
-            st.setString(3, b.getFoto());
+            st.setDouble(4, b.getPrecio());
+            st.setString(5, b.getFoto());
             st.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();

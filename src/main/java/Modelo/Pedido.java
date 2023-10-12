@@ -1,11 +1,20 @@
 package Modelo;
 public class Pedido {
+    private int n_pedido;
     private double cost_acum;
     private int cant;
     private String cliente;
     private String bebida;
     
     public Pedido() {
+    }
+
+    public int getN_pedido() {
+        return n_pedido;
+    }
+
+    public void setN_pedido(int n_pedido) {
+        this.n_pedido = n_pedido;
     }
     
     public String getCliente() {
