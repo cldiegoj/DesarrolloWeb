@@ -61,7 +61,7 @@ public class UsuarioDAO {
 
         try {
             conn = MySQLConexion.getConexion();
-            String sql = "select dni, apelnom, telef, dir, correo from usuario\n" +
+            String sql = "select dni, apelnom, telef, correo, dir from usuario\n" +
                 "where dni like ? or apelnom like ?";
             //? =equivale a un parametro 
             PreparedStatement st = conn.prepareStatement(sql);
