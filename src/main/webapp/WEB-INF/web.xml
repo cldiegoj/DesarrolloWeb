@@ -12,6 +12,18 @@
         <servlet-name>ctrlBebidas</servlet-name>
         <servlet-class>Controlador.ctrlBebidas</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>prueba</servlet-name>
+        <servlet-class>Controlador.prueba</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Prueba</servlet-name>
+        <servlet-class>Controlador.Prueba</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ctrlBebida</servlet-name>
+        <servlet-class>Controlador.ctrlBebida</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ctrlUsuario</servlet-name>
         <url-pattern>/ctrlUsuario</url-pattern>
@@ -23,6 +35,14 @@
     <servlet-mapping>
         <servlet-name>ctrlBebidas</servlet-name>
         <url-pattern>/ctrlBebidas</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Prueba</servlet-name>
+        <url-pattern>/Prueba</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ctrlBebida</servlet-name>
+        <url-pattern>/ctrlBebida</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

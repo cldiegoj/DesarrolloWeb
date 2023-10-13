@@ -6,35 +6,36 @@ package Controlador;
 
 import ModeloDAO.BebidaDAO;
 import com.google.gson.Gson;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author lissy
+ * @author djcor
  */
-public class ctrlBebidas extends HttpServlet {
-    
+public class ctrlBebida extends HttpServlet {
+
     BebidaDAO obj = new BebidaDAO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int op=Integer.parseInt(request.getParameter("opc"));
-        if(op==1)filtrobebidas(request, response);
+        int op = Integer.parseInt(request.getParameter("opc"));
+        if (op == 1) {
+            filtrobebidas(request, response);
+        }
     }
-    
+
     protected void filtrobebidas(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-        PrintWriter out=response.getWriter();
-        String con=request.getParameter("consulta");
-        Gson gs=new Gson();
+            throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
+        String con = request.getParameter("consulta");
+        Gson gs = new Gson();
         out.print(gs.toJson(obj.filtrarBeb(con)));
-      }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
