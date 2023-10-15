@@ -42,23 +42,18 @@ public class EnvioDAO {
          return lista;
      }
     
-    public void adicion(Envio e) {
-        Connection cn = MySQLConexion.getConexion();
-        String sql = "INSERT INTO ENVIO VALUES(?,?,?,?,?,?,?)";
-        try {
-            PreparedStatement st = cn.prepareStatement(sql);
-            st.setInt(1, e.getId());
-            st.setDouble(2, e.getCost_env());
-            st.setDouble(3, e.getCost_total());
-            st.setDate(4, (Date) e.getH_env());
-            st.setDate(5, (Date) e.getH_rec());
-            st.setString(6, e.getEstado());
-            st.setString(7, e.getConductor());
-            st.executeUpdate();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
+    public void adicion(Envio e){
+     Connection cn=MySQLConexion.getConexion();
+     String sql="INSERT INTO `envio` VALUES (null,?,?,now(),now(),'enviado','11111111')";
+     try{
+        PreparedStatement st=cn.prepareStatement(sql);
+         st.setDouble(1, e.getCost_env());
+         st.setDouble(2, e.getCost_total());
+         st.executeUpdate();
+     }catch(Exception ex){
+         ex.printStackTrace();
+     }
+     }
     
     public void actualiza(Envio e) {
         Connection cn = MySQLConexion.getConexion();
