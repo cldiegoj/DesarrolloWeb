@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="Modelo.Pedido,ModeloDAO.PedidoDAO" %>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -20,18 +21,20 @@
 
 		<div>
 			<div class="alert alert-light" role="alert">
-			<marquee behaviour="slide" direction="left">"PROHIBIDA LA VENTA Y/O ENTREGA DE BEBIDAS ALCOH”LICAS A MENORES DE 18 A—OS?, ?SI HAS INGERIDO BEBIDAS ALCOH”LICAS, NO MANEJES?, ?TOMAR EN EXCESO ES DA—INO PARA LA SALUD?, ?EN ESTE LOCAL LA VENTA DE BEBIDAS ALCOH”LICAS ES DE HASTA LAS 2AM?</marquee>
+			<marquee behaviour="slide" direction="left">"PROHIBIDA LA VENTA Y/O ENTREGA DE BEBIDAS ALCOH√ìLICAS A MENORES DE 18 A√ëOS?, ?SI HAS INGERIDO BEBIDAS ALCOH√ìLICAS, NO MANEJES?, ?TOMAR EN EXCESO ES DA√ëINO PARA LA SALUD?, ?EN ESTE LOCAL LA VENTA DE BEBIDAS ALCOH√ìLICAS ES DE HASTA LAS 2AM?</marquee>
 			
 			<!--Boton-->
 			    <div class="boton-modal">
 			        <label for="btn-modal">
-			            °M¡NDAME MIS CHELAS!
+			            ¬°M√ÅNDAME MIS CHELAS!
 			        </label>
 			    </div>
 			<!--Fin de Boton-->
 
                             <%
+                                
                                 String n=(String)session.getAttribute("estado");
+                                String dni=(String)session.getAttribute("dni");
                                 if(n.equalsIgnoreCase("activo")){
                                     %> 
                                     <a href="ctrlUsuario?opc=3"><img src="imagenes/logout.png" width="30px" class="rounded float-end" alt="..."></a>
@@ -52,24 +55,31 @@
 				      <th scope="col">Quitar?</th>
 				    </tr>
 				  </thead>
-			<?php foreach (listarPedido($conn) as $key => $value) { ; ?>
+			<%
+                            double p_total=0;
+                            PedidoDAO obj = new PedidoDAO();
+                            for(Pedido x : obj.listado(dni)){
+                        %>
 				    <tr>
-				      <td><img src="<?=$value[5]?>" width="160px"	alt="..."></td>
+				      <td><img src="otros recursos/BEBIDAS/<%=x.getFoto()%>" width="160px" alt="..."></td>
 				      <td>
-				      <?php echo "<h5> Nombre: 		".$value[2]."</h3>".
-				      			 "<h5> DescripciÛn: ".$value[1]."</h3>".
-				      			 "<h5> Cantidad: 	".$value[3]."</h3>".
-				      			 "<h5> P.Acumulado: ".$value[4]."</h3>" ; 
-				      			 $aux=$aux+$value[4];
-						?>
+                                        <h5> <%=x.getNom()%>.</h5>
+                                        <h5> <%=x.getDescrip()%>.</h5>
+                                        <h5> Cantidad: <%=x.getCant()%></h5>
+				      	<h5> P.Acumulado: <%=x.getCost_acum()%></h5>
 				      </td>
-				      <td><form method="post" action="../PHP/llamadas/proceso_envio.php">
-							<input type="hidden" name="n_pedido" value="<?=$value[0]?>">
-						  <input type="submit" class="btn btn-dark" name="action" value="Eliminar">				
-						</form></td>
+				      <td>
+                                          <form method="post" action="ctrlPedido">
+                                              <input type="hidden" name="opc" value="2">
+                                            <input type="hidden" name="n_pedido" value="<%=x.getId()%>">
+                                            <button type="submit" class="btn btn-dark">Eliminar</button>
+                                          </form>
+                                      </td>
 				    </tr>
-
-			<?php } ?>
+                        <%
+                            p_total=p_total+x.getCost_acum();
+                            }
+                        %>
 			  </tbody>
 			</table>	
 		</div>
@@ -80,10 +90,11 @@
     <input type="checkbox" id="btn-modal">
     <div class="container-modal">
         <div class="content-modal">
-        	<h4>COSTO TOTAL: <?=$aux+10?></h4>
-        	<form method="POST" action="../PHP/llamadas/proceso_envio.php">
-        		<input type="hidden" name="cost_total" value="<?=$aux+10?>">
-        		<input type="submit" name="action" value="°°COMPRAR!!">
+        	<h4>COSTO TOTAL: <%=p_total%></h4>
+        	<form method="POST" action="ctrlEnvio">
+        		<input type="hidden" name="cost_total" value="<%=p_total%>">
+                        <input type="hidden" name="opc" value="1">
+                        <button type="submit">¬°¬°COMPRAR!!</button>
         	</form> 
             <div class="btn-cerrar">
                 <label for="btn-modal">Cerrar</label>
