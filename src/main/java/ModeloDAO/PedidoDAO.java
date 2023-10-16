@@ -40,6 +40,33 @@ public class PedidoDAO {
         return lista;
     }
 
+    public List<Pedido> listado(String dni){
+        
+     Connection cn=MySQLConexion.getConexion();
+     String sql="select p.n_pedido,b.descrip,b.nom,p.cant,p.cost_acum,b.foto "
+             + "from bebida b inner join pedido p ON (b.cod=p.bebida)"
+             + " where cliente=?";
+     List<Pedido> lista=new ArrayList();
+     try{
+        PreparedStatement st=cn.prepareStatement(sql);
+         st.setString(1, dni);
+         ResultSet rs=st.executeQuery();
+         while(rs.next()){
+             Pedido p=new Pedido();
+             p.setId(rs.getInt(1));
+             p.setDescrip(rs.getString(2));
+             p.setNom(rs.getString(3));
+             p.setCant(rs.getInt(4));
+             p.setCost_acum(rs.getDouble(5));
+             p.setFoto(rs.getString(6));
+             lista.add(p);
+         }
+     }catch(Exception ex){
+         ex.printStackTrace();
+     }
+         return lista;
+    }
+
     public void adicion(Pedido p) {
         Connection cn = MySQLConexion.getConexion();
         String sql = "INSERT INTO `pedido` VALUES (null,?,?,?,?)";
@@ -82,5 +109,18 @@ public class PedidoDAO {
             ex.printStackTrace();
         }
     }
+
+    public void eliminar(Pedido p){
+     Connection cn=MySQLConexion.getConexion();
+     String sql="delete from pedido where n_pedido=?";
+     try{
+        PreparedStatement st=cn.prepareStatement(sql);
+         st.setInt(1, p.getId());
+         st.executeUpdate();
+     }catch(Exception ex){
+         ex.printStackTrace();
+     }
+     }
+    
 
 }
