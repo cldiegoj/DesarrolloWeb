@@ -23,6 +23,7 @@ public class ctrlPedido extends HttpServlet {
             throws ServletException, IOException {
         int op=Integer.parseInt(request.getParameter("opc"));
         if(op==1)adicionPedido(request, response);
+        if(op==2)eliminarPedido(request, response);
     }
     
     protected void adicionPedido(HttpServletRequest request, HttpServletResponse response)
@@ -38,6 +39,17 @@ public class ctrlPedido extends HttpServlet {
       p.setBebida(request.getParameter("cod"));
       obj.adicion(p);
       String pag="/Carrito.jsp";
+      request.getRequestDispatcher(pag).forward(request, response);
+    }
+
+    protected void eliminarPedido(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+    Pedido p=new Pedido();
+    HttpSession session=request.getSession();
+      p.setId(Integer.parseInt(request.getParameter("n_pedido")));
+
+      obj.eliminar(p);
+      String pag="/Micarrito.jsp";
       request.getRequestDispatcher(pag).forward(request, response);
     }
 
