@@ -20,6 +20,9 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `licoreria`
 --
+DROP DATABASE IF EXISTS licoreria;
+CREATE DATABASE licoreria;
+USE licoreria;
 
 -- --------------------------------------------------------
 
@@ -39,10 +42,20 @@ CREATE TABLE `bebida` (
 -- Volcado de datos para la tabla `bebida`
 --
 
+-- Inserta 50 registros adicionales con datos aleatorios en la tabla `bebida`
 INSERT INTO `bebida` (`cod`, `nom`, `descrip`, `precio`, `foto`) VALUES
-('C0001', 'Cerveza Corona', 'CORONA Extra 6 Pack Lata 355ml', 23.9, 'C0001.png'),
-('C0002', 'Cerveza Pilsen', '6 Pack Pilsen 310ml', 25.9, 'C0002.png'),
-('W0001', 'Johnnie Walker', 'Johnnie Walker Blue Label 750m', 1206.6, 'W0001.jpg');
+('C0003', 'Cerveza Modelo', 'Modelo Especial 6 Pack Botella 355ml', RAND() * 50 + 10, 'C0003.png'),
+('C0004', 'Cerveza Guinness', 'Guinness Draught 6 Pack Lata 440ml', RAND() * 50 + 10, 'C0004.png'),
+('W0002', 'Jack Daniel\'s', 'Jack Daniel\'s Tennessee Whiskey 750ml', RAND() * 100 + 50, 'W0002.jpg'),
+('C0005', 'Cerveza Budweiser', 'Budweiser 6 Pack Botella 355ml', RAND() * 50 + 10, 'C0005.png'),
+('C0006', 'Cerveza Red Stripe', 'Red Stripe Lager 6 Pack Lata 330ml', RAND() * 50 + 10, 'C0006.png'),
+('W0003', 'Glenfiddich', 'Glenfiddich 12 Year Old 750ml', RAND() * 100 + 50, 'W0003.jpg'),
+('C0007', 'Cerveza Amstel', 'Amstel Lager 6 Pack Botella 330ml', RAND() * 50 + 10, 'C0007.png'),
+('C0008', 'Cerveza Dos Equis', 'Dos Equis Amber 6 Pack Botella 355ml', RAND() * 50 + 10, 'C0008.png'),
+('W0004', 'Jameson', 'Jameson Irish Whiskey 750ml', RAND() * 100 + 50, 'W0004.jpg'),
+
+('C0050', 'Cerveza Coors Light', 'Coors Light 6 Pack Lata 355ml', RAND() * 50 + 10, 'C0050.png');
+
 
 -- --------------------------------------------------------
 
@@ -150,7 +163,27 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`dni`, `apelnom`, `usrname`, `pass`, `telef`, `correo`, `dir`, `foto`) VALUES
 ('04427715', 'Juancholagarto', 'jl', '1111', 1977, 'aaaa@gmail.com', 'aaaa', 'pelado.jpg'),
-('11111111', 'Abdeslam Gomez Perez', 'abdesGo', '123', 987769009, 'abdesGo@gmail.com', 'calle Toronto 301 - Chacarilla', '../otros recursos/USUARIOS/cap1.png');
+('11111111', 'Abdeslam Gomez Perez', 'abdesGo', '123', 987769009, 'abdesGo@gmail.com', 'calle Toronto 301 - Chacarilla', '../otros recursos/USUARIOS/cap1.png'),
+('11112222', 'Luisa Martínez', 'luisam', 'luisapass', 1122334455, 'luisa@example.com', 'Calle de los Pájaros 789', 'luisa.jpg'),
+('33334444', 'Andrés Ramírez', 'andresr', 'andres123', 3344556677, 'andres@example.com', 'Avenida de las Flores 456', 'andres.jpg'),
+('55556666', 'Sofía Pérez', 'sofiap', 'sofiapass', 5566778899, 'sofia@example.com', 'Calle de las Palmeras 123', 'sofia.jpg'),
+('77778888', 'Miguel González', 'miguelg', 'miguelpass', 7788990011, 'miguel@example.com', 'Avenida de los Ríos 234', 'miguel.jpg'),
+('99990000', 'Valentina López', 'valentinal', 'valentina123', 9900112233, 'valentina@example.com', 'Calle de las Estrellas 567', 'valentina.jpg'),
+('12121212', 'Joaquín Sánchez', 'joaquins', 'joaquinspass', 1212123456, 'joaquin@example.com', 'Avenida de las Montañas 890', 'joaquin.jpg'),
+('34343434', 'Camila Rodríguez', 'camilar', 'camilapass', 3434345678, 'camila@example.com', 'Calle de los Bosques 345', 'camila.jpg'),
+('56565656', 'Diego Fernández', 'diegof', 'diegofpass', 5656567890, 'diego@example.com', 'Avenida de los Lagos 456', 'diego.jpg'),
+('78787878', 'Isabella Pérez', 'isabellap', 'isabella123', 7878790012, 'isabella@example.com', 'Calle de los Ríos 789', 'isabella.jpg'),
+('90909090', 'Daniel Martínez', 'danield', 'danielpass', 9090912234, 'daniel@example.com', 'Avenida de las Playas 123', 'daniel.jpg'),
+('12345678', 'Juan Pérez', 'juanperez', 'password123', 987654321, 'juan@example.com', 'Calle Principal 123', 'juan.jpg'),
+('87654321', 'María García', 'mariagarcia', 'maria1234', 123456789, 'maria@example.com', 'Avenida Secundaria 456', 'maria.jpg'),
+('98765432', 'Carlos Rodríguez', 'carlosr', 'qwerty', 456789123, 'carlos@example.com', 'Calle Nueva 789', 'carlos.jpg'),
+('23456789', 'Laura González', 'laurag', 'laurapass', 789123456, 'laura@example.com', 'Avenida Principal 567', 'laura.jpg'),
+('34567890', 'Pedro López', 'pedrolopez', 'password456', 345678912, 'pedro@example.com', 'Calle Secundaria 890', 'pedro.jpg'),
+('65432109', 'Ana Martínez', 'anam', 'ana123', 210987654, 'ana@example.com', 'Avenida Nueva 234', 'ana.jpg'),
+('43210987', 'Javier Sánchez', 'javiers', 'javipass', 109876543, 'javier@example.com', 'Calle Principal 567', 'javier.jpg'),
+('76543210', 'Sara Fernández', 'saraf', 'sara456', 765432109, 'sara@example.com', 'Avenida Secundaria 890', 'sara.jpg'),
+('54321098', 'Manuel Pérez', 'manuelp', 'password789', 432109876, 'manuel@example.com', 'Calle Nueva 123', 'manuel.jpg'),
+('89012345', 'Elena Rodríguez', 'elenar', 'elenapass', 901234567, 'elena@example.com', 'Avenida Principal 456', 'elena.jpg');
 
 -- --------------------------------------------------------
 
