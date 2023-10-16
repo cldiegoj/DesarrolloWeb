@@ -1,6 +1,6 @@
 package Modelo;
-public class Pedido {
-    private int n_pedido;
+public class Pedido extends Bebidas{
+    private int id;
     private double cost_acum;
     private int cant;
     private String cliente;
@@ -9,12 +9,12 @@ public class Pedido {
     public Pedido() {
     }
 
-    public int getN_pedido() {
-        return n_pedido;
+    public int getId() {
+        return id;
     }
 
-    public void setN_pedido(int n_pedido) {
-        this.n_pedido = n_pedido;
+    public void setId(int id) {
+        this.id = id;
     }
     
     public String getCliente() {
@@ -50,4 +50,6 @@ public class Pedido {
     }
     
     
+    
 }
+
