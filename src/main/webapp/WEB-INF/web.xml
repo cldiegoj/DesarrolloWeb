@@ -24,6 +24,10 @@
         <servlet-name>ctrlBebida</servlet-name>
         <servlet-class>Controlador.ctrlBebida</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>control</servlet-name>
+        <servlet-class>Controlador.control</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ctrlUsuario</servlet-name>
         <url-pattern>/ctrlUsuario</url-pattern>
@@ -43,6 +47,10 @@
     <servlet-mapping>
         <servlet-name>ctrlBebida</servlet-name>
         <url-pattern>/ctrlBebida</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>control</servlet-name>
+        <url-pattern>/control</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
