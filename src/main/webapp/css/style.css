@@ -536,3 +536,15 @@ body{
     justify-content: space-between;
 }
 }
+
+.buttton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 50px;
+    color: white;
+}
+
+.textoxd{
+    color: white;
+}

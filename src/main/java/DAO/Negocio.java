@@ -75,7 +75,7 @@ public class Negocio implements Itienda {
         Connection cn = MySQLConexion.getConexion();
         Articulo articulo = null;
         try {
-            String sql = "SELECT coda, nomart, precio, stock, imagen FROM articulos WHERE coda=?";
+            String sql = "SELECT cod, nom, descrip, precio, foto FROM bebidas WHERE cod=?";
             PreparedStatement st = cn.prepareStatement(sql);
             st.setString(1, id);
             ResultSet rs = st.executeQuery();

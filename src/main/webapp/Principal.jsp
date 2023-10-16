@@ -247,9 +247,15 @@
                     <div class="swiper-button-next"></div>
                     <div class="swiper-button-prev"></div>
                 </div>
-            </div>
+            </div><!-- comment -->
+            
         </div>
+        
+        <div class="buttton">
+            <a href="FiltrodeBebidas.jsp" class="textoxd">Filtra tus chelas!!</a>
+            </div>
     </main>
+
 <!--INFORMACIÓN-->
     <section class="info container">
 
@@ -262,8 +268,9 @@
             <p>
                 Consumir vino tinto de forma regular y moderada ayuda a reducir el deterioro cognitivo propio de la edad y, con él, demencias y enfermedades degenerativas cerebrales.Asi mismo, reduce las probabilidades de contraer artritis reumática en un 50%.
             </p>
-            <a href="#" class="btn-2">Mas Información</a>
-        </div>
+            <a href="FiltrodeUsuarios.jsp" class="btn-2">CONOCE NUESTRA FAMILIA!</a>
+        </div><br><!-- comment --><br>
+
     </section>
 <!--HORARIO-->    
     <section class="horario">

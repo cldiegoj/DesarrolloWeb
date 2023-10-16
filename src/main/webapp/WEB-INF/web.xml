@@ -5,6 +5,10 @@
         <servlet-class>Controlador.ctrlUsuario</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ctrlEnvio</servlet-name>
+        <servlet-class>Controlador.ctrlEnvio</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ctrlPedido</servlet-name>
         <servlet-class>Controlador.ctrlPedido</servlet-class>
     </servlet>
@@ -51,6 +55,10 @@
     <servlet-mapping>
         <servlet-name>control</servlet-name>
         <url-pattern>/control</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>ctrlEnvio</servlet-name>
+        <url-pattern>/ctrlEnvio</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

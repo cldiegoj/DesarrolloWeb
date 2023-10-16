@@ -9,6 +9,7 @@
     </head>
     <body>
         <h1>Filtrar Bebidas</h1>
+        <a href="Principal.jsp">Regresar</a><br>
         <label>Ingrese nombre de la bebida:</label>
         <input id="txtnom">
         <br>

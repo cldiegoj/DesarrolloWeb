@@ -37,7 +37,7 @@
                 <td><c:out value="${compra.getPrecio()}" /></td>
                 <td><c:out value="${compra.getCantidad()}" /></td>
                 <td><c:out value="${compra.total()}" /></td>
-                <td><img src="images/<c:out value="${compra.getImagen()}" />" width="80" height="70" /></td>
+                <td><img src="images/<c:out value=${compra.getImagen()} width="80" height="70" /></td>
             </tr>
         </c:forEach>
         <tr>

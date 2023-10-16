@@ -5,6 +5,8 @@
 package ModeloDAO;
 
 import Modelo.Bebidas;
+import Modelo.Grafico;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -118,4 +120,39 @@ public class BebidaDAO {
 
         return lis;
     }
+     
+     public List<Grafico> lisBebida() {
+        List<Grafico> lis = new ArrayList<>();
+        Connection conn = null;
+      try {
+            conn = MySQLConexion.getConexion();
+            String sql = "SELECT\n" +
+"  SUM(CASE WHEN LEFT(`cod`, 1) = 'C' THEN 1 ELSE 0 END) AS cantidad_cervezas,\n" +
+"  SUM(CASE WHEN LEFT(`cod`, 1) = 'W' THEN 1 ELSE 0 END) AS cantidad_whiskys\n" +
+"FROM `bebida`;";
+            //? =equivale a un parametro 
+            CallableStatement st = conn.prepareCall(sql);
+            //relacionar el ? con su variable 
+           ResultSet rs = st.executeQuery();
+            //llenar el arraylist con la clase entidad
+            while (rs.next()) {
+               Grafico a = new Grafico();
+                a.setCervesas(rs.getInt(1));
+                a.setWhiskys(rs.getInt(2));
+                lis.add(a);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e2) {
+            }
+        }
+
+        return lis;
+    } 
 }

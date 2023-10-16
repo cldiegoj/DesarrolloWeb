@@ -26,7 +26,7 @@
 			<!--Boton-->
 			    <div class="boton-modal">
 			        <label for="btn-modal">
-			            ¡MÁNDAME MIS CHELAS!
+			            MANDAME MIS CHELAS!
 			        </label>
 			    </div>
 			<!--Fin de Boton-->
@@ -94,7 +94,7 @@
         	<form method="POST" action="ctrlEnvio">
         		<input type="hidden" name="cost_total" value="<%=p_total%>">
                         <input type="hidden" name="opc" value="1">
-                        <button type="submit">¡¡COMPRAR!!</button>
+                        <button type="submit">�A COMPRAR!!</button>
         	</form> 
             <div class="btn-cerrar">
                 <label for="btn-modal">Cerrar</label>

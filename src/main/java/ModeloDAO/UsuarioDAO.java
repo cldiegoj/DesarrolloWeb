@@ -76,8 +76,8 @@ public class UsuarioDAO {
                 a.setDni(rs.getString(1));
                 a.setApelnom(rs.getString(2));
                 a.setTelef(rs.getInt(3));
-                a.setDir(rs.getString(4));
-                a.setCorreo(rs.getString(5));
+                a.setCorreo(rs.getString(4));
+                a.setDir(rs.getString(5));
                 lis.add(a);
             }
         } catch (Exception ex) {

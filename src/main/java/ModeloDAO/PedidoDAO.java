@@ -27,7 +27,7 @@ public class PedidoDAO {
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Pedido p = new Pedido();
-                p.setN_pedido(rs.getInt(1));
+                p.setId(rs.getInt(1));
                 p.setCost_acum(rs.getDouble(2));
                 p.setCant(rs.getInt(3));
                 p.setCliente(rs.getString(4));
@@ -91,7 +91,7 @@ public class PedidoDAO {
             st.setInt(2, p.getCant());
             st.setString(3, p.getCliente());
             st.setString(4, p.getBebida());
-            st.setInt(4, p.getN_pedido());
+            st.setInt(4, p.getId());
             st.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();

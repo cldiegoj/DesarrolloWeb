@@ -17,6 +17,9 @@
     </head>
     <body>
         <h1>Filtrar datos del usuario</h1>
+        
+        <a href="Principal.jsp">Regresar</a><!-- comment -->
+        <br>
         <label>Ingrese DNI o Nombre :</label>
         <input id="txtnom">
         <br>
