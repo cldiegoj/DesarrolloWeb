@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
-<head>
-</head>
+    <head>
+    </head>
 
-<body>
+    <body>
 
         <div class="menu container">
 
@@ -27,12 +27,6 @@
                 <img class="logo-2"src="imagenes/logo.jpg" alt="">
 
                 <div class="menu-2">
-
-                    <ul>
-                        <li><a href="#">Horario</a></li>
-                        <li><a href="Carrito.jsp">Carrito</a></li>
-                        <li><a href="login.jsp">Login</a></li>
-                    </ul>
                     <div class="socials">
                         <a href="#">
                             <div class="social">
@@ -50,10 +44,13 @@
                             </div>
                         </a>
                     </div>
-                </div>
-
+                    <ul>
+                        <li><a href="#">Horario</a></li>
+                        <li><a href="Carrito.jsp">Carrito</a></li>
+                        <li><a href="login.jsp">Login</a></li>
+                    </ul>
             </nav>
 
         </div> 
-</body>
+    </body>
 </html>

@@ -26,6 +26,9 @@
 
                             <%
                                 String n=(String)session.getAttribute("estado");
+                                if(n==null){
+                                    request.getRequestDispatcher("/login.jsp").forward(request, response);
+                                };
                                 if(n.equalsIgnoreCase("activo")){
                                     %> 
                                     <a href="ctrlUsuario?opc=3"><img src="imagenes/logout.png" width="30px" class="rounded float-end" alt="..."></a>

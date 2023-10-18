@@ -11,10 +11,10 @@ package Modelo;
 public class Grafico {
     private int cervesas;
     private int whiskys;
-    public String Lmes(){
+    /*public String Lmes(){
     String bebida[]={"","Cervesa","Whisky"};    
      return bebida[];   
-    }
+    }*/
 
     public int getCervesas() {
         return cervesas;
