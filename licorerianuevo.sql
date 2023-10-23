@@ -328,6 +328,18 @@ INSERT INTO bebida (`beb_cod`, `beb_nom`, `beb_des`, `beb_pre`, `beb_stk`, `beb_
 ('B0099', 'Licor de Ciruela', 'Licor de ciruela de calidad', 26.99, 45, 'licor_ciruela.jpg', 'C0010', 'P0009'),
 ('B0100', 'Licor de Cereza', 'Licor de cereza con toques frutales', 22.99, 50, 'licor_cereza.jpg', 'C0010', 'P0010');
 
+-- Categoría: Refrescos
+INSERT INTO bebida (`beb_cod`, `beb_nom`, `beb_des`, `beb_pre`, `beb_stk`, `beb_foto`, `cat_cod`, `pro_cod`) VALUES
+('B0101', 'Coca-Cola', 'Refresco de cola carbonatado', 2.99, 100, 'coca_cola.jpg', 'C0011', 'P0001'),
+('B0102', 'Pepsi', 'Refresco de cola alternativo', 2.79, 90, 'pepsi.jpg', 'C0011', 'P0002'),
+('B0103', 'Sprite', 'Refresco de limón carbonatado', 2.49, 80, 'sprite.jpg', 'C0011', 'P0003'),
+('B0104', 'Fanta Naranja', 'Refresco de naranja carbonatado', 2.69, 85, 'fanta_naranja.jpg', 'C0011', 'P0004'),
+('B0105', 'Fanta Lima-Limón', 'Refresco de lima-limón carbonatado', 2.69, 85, 'fanta_lima_limón.jpg', 'C0011', 'P0005'),
+('B0106', 'Mountain Dew', 'Refresco cítrico y energizante', 2.79, 75, 'mountain_dew.jpg', 'C0011', 'P0006'),
+('B0107', 'Dr. Pepper', 'Refresco con sabores variados', 2.89, 70, 'dr_pepper.jpg', 'C0011', 'P0007'),
+('B0108', '7UP', 'Refresco de limón-lima carbonatado', 2.49, 80, '7up.jpg', 'C0011', 'P0008'),
+('B0109', 'Ginger Ale', 'Refresco de jengibre carbonatado', 2.59, 75, 'ginger_ale.jpg', 'C0011', 'P0009'),
+('B0110', 'Root Beer', 'Refresco de raíz con sabor a vainilla', 2.69, 70, 'root_beer.jpg', 'C0011', 'P0010');
 
 -- Conductor 1
 INSERT INTO conductor (`con_cod`, `con_nom`, `con_ape`, `con_lic`, `con_foto`, `con_edad`) VALUES
