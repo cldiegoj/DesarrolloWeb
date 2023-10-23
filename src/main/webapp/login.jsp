@@ -16,6 +16,7 @@
 
         <%
             String n = (String) session.getAttribute("estado");
+            
             if (n != null) {
                 request.getRequestDispatcher("/Principal.jsp").forward(request, response);
             };

@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<%@ page import="Modelo.Articulo" %>
+<%@ page import="Modelo.*" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,10 +32,44 @@
             </div>
         </header>
 
-        <center>
-            <table border="1" cellspacing="20" cellpadding="20">
-               
+        <%
+            Bebidas ar = (Bebidas) request.getAttribute("dato");
+        %>
+    <center>
+        <h2 class="textoxd">Detalle del Articulo</h2>
+        <a href="#" onclick="history.back()" class="textoxd">Retornar</a><br><br>
+
+        <form action="control" name="fr">  
+            <table border="1" cellspacing="15" cellpadding="15">
+                <input type="hidden" name="opc" value="3">
+                <input type="hidden" name="cod" value="<%=ar.getCod()%>">
+
+                <tr><td rowspan="5"><img src="imagenes/Bebidas/<%=ar.getFoto()%>" width="200" height="200">
+                    <td class="textoxd">Descripcion<td class="textoxd"><%=ar.getNom()%>
+                <tr><td class="textoxd">Precio Unitario<td class="textoxd"><%=ar.getPrecio()%>
+                <tr><td class="textoxd">Stock<td class="textoxd"><%=ar.getStock()%>        
+                <tr><td class="textoxd">Cantidad<td class="textoxd"><input name="cantidad">
+                <tr><td><center><a href="#" onclick="valida()"><<img src="imagenes/cesta.gif"></a></center> 
             </table>
-        </center>
-    </body>
+        </form> 
+
+    </center>
+
+    <section>
+        <footer class="footer container">
+            <%@include file="header_footer/Footer.jsp" %>
+        </footer>
+    </section>
+    <script>
+        function valida() {
+            sk = <%=ar.getStock()%>;
+            can = Number(fr.cantidad.value);
+            if (sk < can) {
+                alert("stock no disponible");
+                return;
+            }
+            fr.submit();
+        }
+    </script>
+</body>
 </html>

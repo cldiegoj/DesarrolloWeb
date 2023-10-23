@@ -32,7 +32,10 @@ public class BebidaDAO {
              b.setNom(rs.getString(2));
              b.setDescrip(rs.getString(3));
              b.setPrecio(rs.getInt(4));
-             b.setFoto(rs.getString(5));
+             b.setStock(rs.getInt(5));
+             b.setFoto(rs.getString(6));
+             b.setCat_cod(rs.getString(7));
+             b.setPro_cod(rs.getString(8));
              lista.add(b);
          }
      }catch(Exception ex){
@@ -43,14 +46,17 @@ public class BebidaDAO {
     
     public void adicion(Bebidas b) {
         Connection cn = MySQLConexion.getConexion();
-        String sql = "INSERT INTO BEBIDA VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO BEBIDA VALUES(?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement st = cn.prepareStatement(sql);
             st.setString(1, b.getCod());
             st.setString(2, b.getNom());
             st.setString(3, b.getDescrip());
             st.setDouble(4, b.getPrecio());
-            st.setString(5, b.getFoto());
+            st.setInt(5, b.getStock());
+            st.setString(6, b.getFoto());
+            st.setString(7, b.getCat_cod());
+            st.setString(8, b.getPro_cod());
             st.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -59,7 +65,7 @@ public class BebidaDAO {
     
     public void actualiza(Bebidas b) {
         Connection cn = MySQLConexion.getConexion();
-        String sql = "update bebida set nom=?, descrip=?, precio=? where cod=?";
+        String sql = "update bebida set beb_nom=?, beb_des=?, beb_pre=? where beb_cod=?";
         try {
             PreparedStatement st = cn.prepareStatement(sql);
             st.setString(1, b.getNom());
@@ -74,7 +80,7 @@ public class BebidaDAO {
     
     public void anula(String nro) {
         Connection cn = MySQLConexion.getConexion();
-        String sql = "delete from bebida where cod=?";
+        String sql = "delete from bebida where beb_cod=?";
         try {
             PreparedStatement st = cn.prepareStatement(sql);
             st.setString(1, nro);
@@ -91,7 +97,7 @@ public class BebidaDAO {
 
         try {
             conn = MySQLConexion.getConexion();
-            String sql = "select cod, nom, descrip, precio from bebida\n" +
+            String sql = "select beb_cod, beb_nom, beb_des, beb_pre, beb_stk, beb_foto from bebida\n" +
                 "where nom like ?";
  
             PreparedStatement st = conn.prepareStatement(sql);
@@ -104,6 +110,8 @@ public class BebidaDAO {
                 a.setNom(rs.getString(2));
                 a.setDescrip(rs.getString(3));
                 a.setPrecio(rs.getDouble(4));
+                a.setStock(rs.getInt(5));
+                a.setFoto(rs.getString(6));
                 lis.add(a);
             }
         } catch (Exception ex) {

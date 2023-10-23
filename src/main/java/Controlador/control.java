@@ -5,7 +5,7 @@
 package Controlador;
 
 import Modelo.*;
-import DAO.Negocio;
+import ModeloDAO.*;
 import java.io.IOException;
 import java.util.*;
 import javax.servlet.ServletException;
@@ -15,72 +15,85 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class control extends HttpServlet {
-    
+
     Negocio negocio = new Negocio();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String op = request.getParameter("opc");
-        if (op.equals("listarProductosPorCategoria")) {
+        if (op.equals("1")) {
             listarProductosPorCategoria(request, response);
-        } else if (op.equals("verDetalleProducto")) {
+        }
+        if (op.equals("2")) {
             verDetalleProducto(request, response);
-        } else if (op.equals("agregarAlCarrito")) {
+        }
+        if (op.equals("3")) {
             agregarAlCarrito(request, response);
+        }
+        if (op.equals("4")) {
+            EliminarBebidaCarrito(request, response);
         }
     }
 
-    private void listarProductosPorCategoria(HttpServletRequest request, HttpServletResponse response) 
+    private void listarProductosPorCategoria(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String codCategoria = request.getParameter("codCategoria");
-        List<Articulo> productos = negocio.listArt(codCategoria);
-        
-        request.setAttribute("productos", productos);
-        
-        String pagina = "productos.jsp";  // Nombre de tu JSP de visualización de productos
-        request.getRequestDispatcher(pagina).forward(request, response);
+
+        String cod = request.getParameter("cod");
+        request.setAttribute("dato", negocio.listBeb(cod));
+
+        String pag = "Articulo.jsp";
+        request.getRequestDispatcher(pag).forward(request, response);
     }
-    
-    private void verDetalleProducto(HttpServletRequest request, HttpServletResponse response) 
+
+    private void verDetalleProducto(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String codigoProducto = request.getParameter("codigoProducto");
-        
-        Articulo producto = negocio.busArt(codigoProducto);
-        
-        request.setAttribute("producto", producto);
-        
-        String pagina = "detalleProducto.jsp";  // Nombre de tu JSP de detalle de producto
-        request.getRequestDispatcher(pagina).forward(request, response);
+        String cod = request.getParameter("cod");
+
+        request.setAttribute("dato", negocio.busBeb(cod));
+
+        String pag = "Detalle.jsp";
+        request.getRequestDispatcher(pag).forward(request, response);
     }
-    
-   private void agregarAlCarrito(HttpServletRequest request, HttpServletResponse response)
+
+    private void agregarAlCarrito(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession ses = request.getSession();
         String cod = request.getParameter("cod");
         int can = Integer.parseInt(request.getParameter("cantidad"));
 
-        Negocio negocio = new Negocio();
-
-        Articulo ar = negocio.busArt(cod);
+        Bebidas ar = negocio.busBeb(cod);
         Compra cp = new Compra();
         cp.setCantidad(can);
         cp.setCod(cod);
-        cp.setImagen(ar.getImagen());
-
-      
+        cp.setFoto(ar.getFoto());
+        cp.setNom(ar.getNom());
         cp.setPrecio(ar.getPrecio());
 
         List<Compra> lista;
         if (ses.getAttribute("canasta") == null) {
-            lista = new ArrayList<>();
+            lista = new ArrayList(); //Se crea la lista
         } else {
             lista = (ArrayList<Compra>) ses.getAttribute("canasta");
         }
         lista.add(cp);
         ses.setAttribute("canasta", lista);
 
-        String pagina = "pagCompra.jsp"; // Asegúrate de que esta sea la ruta correcta a tu página de carrito
-        request.getRequestDispatcher(pagina).forward(request, response);
+        String pag = "Compra.jsp";
+        request.getRequestDispatcher(pag).forward(request, response);
+    }
+    
+    private void EliminarBebidaCarrito(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String cod = request.getParameter("cod");
+        int indice = Integer.parseInt(request.getParameter("indice"));
+        
+        HttpSession ses = request.getSession();
+        List<Compra> lista = (ArrayList<Compra>)ses.getAttribute("canasta");
+        
+        lista.remove(indice);
+        ses.setAttribute("canasta", lista);
+        String pag = "Compra.jsp";
+        request.getRequestDispatcher(pag).forward(request, response);
     }
 
     @Override

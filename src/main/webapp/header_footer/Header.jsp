@@ -46,7 +46,7 @@
                     </div>
                     <ul>
                         <li><a href="#">Horario</a></li>
-                        <li><a href="Carrito.jsp">Carrito</a></li>
+                        <li><a href="Categoria.jsp">Carrito</a></li>
                         <li><a href="login.jsp">Login</a></li>
                     </ul>
             </nav>

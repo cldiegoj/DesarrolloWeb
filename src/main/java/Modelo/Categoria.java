@@ -1,18 +1,13 @@
-
 package Modelo;
 
 public class Categoria {
+
     private String codc;
     private String nomc;
+    private String desc;
     private String imagen;
 
     public Categoria() {
-    }
-
-    public Categoria(String codc, String nomc, String imagen) {
-        this.codc = codc;
-        this.nomc = nomc;
-        this.imagen = imagen;
     }
 
     public String getCodc() {
@@ -31,6 +26,14 @@ public class Categoria {
         this.nomc = nomc;
     }
 
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
     public String getImagen() {
         return imagen;
     }
@@ -38,4 +41,5 @@ public class Categoria {
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
+
 }

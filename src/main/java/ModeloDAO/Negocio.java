@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DAO;
+package ModeloDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,15 +20,16 @@ public class Negocio implements Itienda {
         Connection cn = MySQLConexion.getConexion();
         List<Categoria> listaCategorias = new ArrayList<>();
         try {
-            String sql = "SELECT idcategoria, descripcion, imagen FROM categorias";
+            String sql = "SELECT cat_cod, cat_nom, cat_des, cat_img FROM categoria";
             PreparedStatement st = cn.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                Categoria categoria = new Categoria();
-                categoria.setCodc(rs.getString(1));
-                categoria.setNomc(rs.getString(2));
-                categoria.setImagen(rs.getString(3));
-                listaCategorias.add(categoria);
+                Categoria c = new Categoria();
+                c.setCodc(rs.getString(1));
+                c.setNomc(rs.getString(2));
+                c.setDesc(rs.getString(3));
+                c.setImagen(rs.getString(4));
+                listaCategorias.add(c);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -42,22 +43,23 @@ public class Negocio implements Itienda {
     }
 
     @Override
-    public List<Articulo> listArt(String id) {
+    public List<Bebidas> listBeb(String id) {
         Connection cn = MySQLConexion.getConexion();
-        List<Articulo> listaArticulos = new ArrayList<>();
+        List<Bebidas> listaArticulos = new ArrayList<>();
         try {
-            String sql = "SELECT coda, nomart, precio, stock, imagen FROM articulos WHERE idcategoria=?";
+            String sql = "SELECT beb_cod, beb_nom, beb_des, beb_pre, beb_stk, beb_foto FROM bebida WHERE cat_cod=?";
             PreparedStatement st = cn.prepareStatement(sql);
             st.setString(1, id);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                Articulo articulo = new Articulo();
-                articulo.setCoda(rs.getString(1));
-                articulo.setNomart(rs.getString(2));
-                articulo.setPrecio(rs.getDouble(3));
-                articulo.setStock(rs.getInt(4));
-                articulo.setImagen(rs.getString(5));
-                listaArticulos.add(articulo);
+                Bebidas b = new Bebidas();
+                b.setCod(rs.getString(1));
+                b.setNom(rs.getString(2));
+                b.setDescrip(rs.getString(3));
+                b.setPrecio(rs.getInt(4));
+                b.setStock(rs.getInt(5));
+                b.setFoto(rs.getString(6));
+                listaArticulos.add(b);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -71,21 +73,22 @@ public class Negocio implements Itienda {
     }
 
     @Override
-    public Articulo busArt(String id) {
+    public Bebidas busBeb(String id) {
         Connection cn = MySQLConexion.getConexion();
-        Articulo articulo = null;
+        Bebidas bebida = null;
         try {
-            String sql = "SELECT cod, nom, descrip, precio, foto FROM bebidas WHERE cod=?";
+            String sql = "SELECT beb_cod, beb_nom, beb_des, beb_pre, beb_stk, beb_foto FROM bebida WHERE beb_cod=?";
             PreparedStatement st = cn.prepareStatement(sql);
             st.setString(1, id);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                articulo = new Articulo();
-                articulo.setCoda(rs.getString(1));
-                articulo.setNomart(rs.getString(2));
-                articulo.setPrecio(rs.getDouble(3));
-                articulo.setStock(rs.getInt(4));
-                articulo.setImagen(rs.getString(5));
+                bebida = new Bebidas();
+                bebida.setCod(rs.getString(1));
+                bebida.setNom(rs.getString(2));
+                bebida.setDescrip(rs.getString(3));
+                bebida.setPrecio(rs.getInt(4));
+                bebida.setStock(rs.getInt(5));
+                bebida.setFoto(rs.getString(6));
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -95,7 +98,7 @@ public class Negocio implements Itienda {
             } catch (Exception ex2) {
             }
         }
-        return articulo;
+        return bebida;
     }
 
     @Override

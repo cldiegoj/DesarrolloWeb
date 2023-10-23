@@ -1,27 +1,37 @@
 package Modelo;
 public class Conductor {
-    private String dni;
-    private String apelnom;
+    private String cod;
+    private String nombre;
+    private String apellido;
     private String licencia;
     private String foto;
+    private int edad;
 
     public Conductor() {
     }
-
-    public String getDni() {
-        return dni;
+    
+    public String getCod() {
+        return cod;
     }
 
-    public void setDni(String dni) {
-        this.dni = dni;
+    public void setCod(String cod) {
+        this.cod = cod;
     }
 
-    public String getApelnom() {
-        return apelnom;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setApelnom(String apelnom) {
-        this.apelnom = apelnom;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
     public String getLicencia() {
@@ -38,6 +48,14 @@ public class Conductor {
 
     public void setFoto(String foto) {
         this.foto = foto;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
     }
     
     

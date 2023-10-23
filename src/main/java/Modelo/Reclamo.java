@@ -8,20 +8,32 @@ package Modelo;
  *
  * @author Obi_Juan
  */
-public class Reclamo extends Usuario{
-    int id_reclamo;
-    String tipo;
-    String descripcion;
-    String solucion;
-    String fecha;
-    String hora;
+public class Reclamo {
+    private String cod;
+    private int dni;
+    private String tipo;
+    private String descrip;
+    private String solucion;
+    private String fecha;
+    private String hora;
 
-    public int getId_reclamo() {
-        return id_reclamo;
+    public Reclamo() {
+    }
+    
+    public String getCod() {
+        return cod;
     }
 
-    public void setId_reclamo(int id_reclamo) {
-        this.id_reclamo = id_reclamo;
+    public void setCod(String cod) {
+        this.cod = cod;
+    }
+
+    public int getDni() {
+        return dni;
+    }
+
+    public void setDni(int dni) {
+        this.dni = dni;
     }
 
     public String getTipo() {
@@ -32,12 +44,12 @@ public class Reclamo extends Usuario{
         this.tipo = tipo;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getDescrip() {
+        return descrip;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDescrip(String descrip) {
+        this.descrip = descrip;
     }
 
     public String getSolucion() {

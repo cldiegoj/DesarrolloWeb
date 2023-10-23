@@ -56,7 +56,7 @@ public class ctrlUsuario extends HttpServlet {
             session.setAttribute("usuario",user);
             session.setAttribute("dni", dni);
             session.setAttribute("estado", "activo");
-            pag="/Carrito.jsp";
+            pag="/Categoria.jsp";
         }
         request.getRequestDispatcher(pag).forward(request, response);
      }

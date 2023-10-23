@@ -4,19 +4,16 @@
  */
 package interfaces;
 
-import Modelo.Articulo;
-import Modelo.Categoria;
-import Modelo.Cliente;
-import Modelo.Compra;
+import Modelo.*;
 import java.util.List;
 
 public interface Itienda {
 
     List<Categoria> listCat(); // Lista de todas las categorías de productos.
 
-    List<Articulo> listArt(String id); // Lista de artículos por categoría.
+    List<Bebidas> listBeb (String id); // Lista de artículos por categoría.
 
-    Articulo busArt(String id); // Buscar un artículo por su código.
+    Bebidas busBeb(String id); // Buscar un artículo por su código.
 
     Cliente busCli(String usr, String pas); // Buscar un cliente por usuario y contraseña.
 

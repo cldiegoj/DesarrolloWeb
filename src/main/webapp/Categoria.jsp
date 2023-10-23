@@ -1,105 +1,80 @@
+<%@page import="ModeloDAO.Negocio"%>
 <%@ page import="java.util.List" %>
 <%@ page import="Modelo.Categoria" %>
-<%@ page import="DAO.Negocio" %>
+<%@ page import="ModeloDAO.*" %>
 <!DOCTYPE html>
 <html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>CATEGORIA</title>
-</head>
-<body>
-    <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
-        <link rel="stylesheet" href="css/style.css">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>CATEGORIA</title>
     </head>
     <body>
-        <!--HEADER-->
-        <header>
-            <%@include file="header_footer/Header.jsp" %>
-            <!--TAMBIEN PRODUCTOS-->
-            <div class="header-content container">
-                <div class="swiper mySwiper-1">
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-pagination"></div>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Document</title>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
+            <link rel="stylesheet" href="css/style.css">
+        </head>
+        <body>
+            <%
+                String n = (String) session.getAttribute("estado");
+                if (n == null) {
+                    request.getRequestDispatcher("/login.jsp").forward(request, response);
+                };
+                if (n.equalsIgnoreCase("activo")) {
+            %> 
+            <a href="ctrlUsuario?opc=3"><img src="imagenes/logout.png" width="30px" class="rounded float-end" alt="..."></a>
+                <%
+                        String dni = (String) session.getAttribute("dni");
+                    } else {
+                        request.getRequestDispatcher("/Principal.jsp").forward(request, response);
+                    }
+                %> 
+            <!--HEADER-->
+            <header>
+                <%@include file="header_footer/Header.jsp" %>
+                <!--TAMBIEN PRODUCTOS-->
+                <div class="header-content container">
+                    <div class="swiper mySwiper-1">
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-pagination"></div>
+                    </div>
                 </div>
-            </div>
-        </header>
-        
-        <center>
-            <table border="1" cellspacing="20" cellpadding="20">
-                <tr>
-                    <td onmouseover="bgColor = 'red'" onmouseout="bgColor = 'black'">
-                        <a href="pagArticulo.jsp?cod=" style="text-decoration: none; color: white;">
-                            <img src="imagenes/slider1.jpg" height="90" width="90">
-                            <br>
-                            <span>Vino</span> <!-- Estilos de fondo negro y letra blanca -->
-                        </a>
-                    </td>
-                </tr>
-            </ta    ble>
-        </center>
-        
-        <center>
-            <table border="1" cellspacing="20" cellpadding="20">
-                <tr>
-                    <td onmouseover="bgColor = 'red'" onmouseout="bgColor = 'black'">
-                        <a href="pagArticulo.jsp?cod=" style="text-decoration: none; color: white;">
-                            <img src="imagenes/slider2.jpg" height="90" width="90">
-                            <br>
-                            <span>RON</span> <!-- Estilos de fondo negro y letra blanca -->
-                        </a>
-                    </td>
-                </tr>
-            </table>
-        </center>
-        
-        <center>
-            <table border="1" cellspacing="20" cellpadding="20">
-                <tr>
-                    <td onmouseover="bgColor = 'red'" onmouseout="bgColor = 'black'">
-                        <a href="pagArticulo.jsp?cod=" style="text-decoration: none; color: white;">
-                            <img src="imagenes/slider3.png" height="90" width="90">
-                            <br>
-                            <span>CERVESA</span> <!-- Estilos de fondo negro y letra blanca -->
-                        </a>
-                    </td>
-                </tr>
-            </table>
-        </center>
-   
-    <%
-        Negocio negocio = new Negocio();
-        List<Categoria> categorias = negocio.listCat();
-    %>
-    <center>
-        <h2>Lista de Categorias</h2>
-        <table border="1" cellspacing="15" cellpadding="15">
-            <tr>
+            </header>
             <%
-                int cuenta = 0;
-                for (Categoria categoria : categorias) {
+                Negocio negocio = new Negocio();
             %>
-                <td onmouseover="bgColor='red'" onmouseout="bgColor='white'">
-                    <a href="control?opc=1&cod=<%= categoria.getCodc() %>">
-                        <img src="images/<%= categoria.getImagen() %>" width="150" height="150"><br><%= categoria.getNomc() %>
+
+        <center>
+            <h2 class="textoxd">Lista de Categorias</h2>
+            <table border="1" cellspacing="15" cellpadding="15">
+                <%
+                    int cuenta = 0;
+                    for (Categoria x : negocio.listCat()) {
+                %>
+                <td onmouseover="bgColor = 'brown'" onmouseout="bgColor = 'black'">
+                    <a href="control?opc=1&cod=<%=x.getCodc()%>">
+                        <img src="imagenes/categorias/<%=x.getImagen()%>.jpg" width="150" height="150"><br><center><%=x.getNomc()%></center>
                     </a>
-                </td>
-            <%
-                cuenta++;
-                if (cuenta % 3 == 0) {
-            %>
-            </tr>
-            <%
-                }
-            }
-            %>
-        </table>
-    </center>
-</body>
+
+                    <%
+                            cuenta++;
+                            if (cuenta % 4 == 0) {
+                                out.print("<tr>");
+                            }
+                        }
+                    %>
+            </table>
+        </center>
+
+        <section>
+            <footer class="footer container">
+                <%@include file="header_footer/Footer.jsp" %>
+            </footer>
+        </section>
+    </body>
 </html>
