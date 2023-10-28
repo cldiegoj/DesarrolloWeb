@@ -1,3 +1,4 @@
+<%@page import="Modelo.Usuario"%>
 <%@page import="ModeloDAO.Negocio"%>
 <%@ page import="java.util.List" %>
 <%@ page import="Modelo.Categoria" %>
@@ -20,15 +21,15 @@
         </head>
         <body>
             <%
-                String n = (String) session.getAttribute("estado");
+                HttpSession ses = request.getSession();
+                Usuario n = (Usuario) ses.getAttribute("estado");
                 if (n == null) {
                     request.getRequestDispatcher("/login.jsp").forward(request, response);
                 };
-                if (n.equalsIgnoreCase("activo")) {
+                if (n != null) {
             %> 
             <a href="ctrlUsuario?opc=3"><img src="imagenes/logout.png" width="30px" class="rounded float-end" alt="..."></a>
                 <%
-                        String dni = (String) session.getAttribute("dni");
                     } else {
                         request.getRequestDispatcher("/Principal.jsp").forward(request, response);
                     }

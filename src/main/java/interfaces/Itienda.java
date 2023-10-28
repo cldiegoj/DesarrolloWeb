@@ -15,7 +15,5 @@ public interface Itienda {
 
     Bebidas busBeb(String id); // Buscar un artículo por su código.
 
-    Cliente busCli(String usr, String pas); // Buscar un cliente por usuario y contraseña.
-
     String grabaFac(String codc, List<Compra> lista); // Registrar una factura en la base de datos.
 }

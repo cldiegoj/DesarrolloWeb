@@ -6,20 +6,17 @@ package Modelo;
 
 import java.sql.Date;
 
-/**
- *
- * @author djcor
- */
 public class FacturaC {
+
     private int num;
     private Date fecha;
-    private double igv;
     private int dni;
+    private double mtotal;
     private String vehiculo;
 
     public FacturaC() {
     }
-    
+
     public int getNum() {
         return num;
     }
@@ -36,12 +33,12 @@ public class FacturaC {
         this.fecha = fecha;
     }
 
-    public double getIgv() {
-        return igv;
+    public double getMtotal() {
+        return mtotal;
     }
 
-    public void setIgv(double igv) {
-        this.igv = igv;
+    public void setMtotal(double mtotal) {
+        this.mtotal = mtotal;
     }
 
     public int getDni() {
@@ -59,6 +56,5 @@ public class FacturaC {
     public void setVehiculo(String vehiculo) {
         this.vehiculo = vehiculo;
     }
-    
-    
+
 }

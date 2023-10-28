@@ -45,8 +45,8 @@ CREATE TABLE `categoria` (
 CREATE TABLE `fac_cabe` (
   `fac_num` char(5) NOT NULL PRIMARY KEY,
   `fac_fec` datetime NOT NULL,
-  `fac_igv` char(1) NOT NULL,
-  `dni` varchar(8) NOT NULL,
+  `id_usuario` varchar(8) NOT NULL,
+  `mtotal` decimal(10,0) NOT NULL,
   `vec_cod` char(5) NOT NULL
 );
 
@@ -65,14 +65,15 @@ CREATE TABLE `fac_deta` (
 --
 
 CREATE TABLE `usuario` (
-  `dni` varchar(8) NOT NULL PRIMARY KEY,
+  `id_usuario` char(5) NOT NULL PRIMARY KEY,
+  `dni` varchar(8) NOT NULL,
   `apelnom` varchar(45) NOT NULL,
   `usrname` varchar(45) NOT NULL,
   `pass` varchar(45) NOT NULL,
   `telef` int(11) NOT NULL,
   `correo` varchar(45) NOT NULL,
   `dir` varchar(45) NOT NULL,
-  `foto` varchar(45) NOT NULL
+  `categoria` int(1) NOT NULL
 );
 
 --
@@ -81,7 +82,7 @@ CREATE TABLE `usuario` (
 
 CREATE TABLE `reclamos` (
   `rec_cod` char(5) NOT NULL PRIMARY KEY,
-  `dni` varchar(8) NOT NULL,
+  `id_usuario` varchar(8) NOT NULL,
   `tipo` varchar(45) NOT NULL,
   `descrip` varchar(45) NOT NULL,
   `solucion` varchar(45) NOT NULL,
@@ -127,10 +128,10 @@ ALTER TABLE `fac_deta`
 ADD CONSTRAINT `fk_facdeta_bebida` FOREIGN KEY (`beb_cod`) REFERENCES `bebida` (`beb_cod`);
 
 ALTER TABLE `reclamos`
-ADD CONSTRAINT `fk_reclamos_usuario` FOREIGN KEY (`dni`) REFERENCES `usuario` (`dni`);
+ADD CONSTRAINT `fk_reclamos_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario``);
 
 ALTER TABLE `fac_cabe`
-ADD CONSTRAINT `fk_faccabe_usuario` FOREIGN KEY (`dni`) REFERENCES `usuario` (`dni`);
+ADD CONSTRAINT `fk_faccabe_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`);
 
 ALTER TABLE `fac_cabe`
 ADD CONSTRAINT `fk_faccabe_vehiculo` FOREIGN KEY (`vec_cod`) REFERENCES `vehiculo` (`vec_cod`);
@@ -155,31 +156,21 @@ INSERT INTO categoria VALUES('C0009','Piscos','Aguardiente obtenido de destilaci
 INSERT INTO categoria VALUES('C0010','Otros Licores','Otras bebidas alcoholicas','C0010');
 INSERT INTO categoria VALUES('C0011','Extras','Bebidas alcoholicas extras','C0011');
 
+CREATE TABLE `usuario` (
+  `id_usuario` char(5) NOT NULL PRIMARY KEY,
+  `dni` varchar(8) NOT NULL,
+  `apelnom` varchar(45) NOT NULL,
+  `usrname` varchar(45) NOT NULL,
+  `pass` varchar(45) NOT NULL,
+  `telef` int(11) NOT NULL,
+  `correo` varchar(45) NOT NULL,
+  `dir` varchar(45) NOT NULL,
+  `categoria` int(1) NOT NULL
+);
 
-
-INSERT INTO `usuario` (`dni`, `apelnom`, `usrname`, `pass`, `telef`, `correo`, `dir`, `foto`) VALUES
+INSERT INTO `usuario` (`id_usuario`, `dni`, `apelnom`, `usrname`, `pass`, `telef`, `correo`, `dir`, `categoria`) VALUES
 ('04427715', 'Juancholagarto', 'jl', '1111', 1977, 'aaaa@gmail.com', 'aaaa', 'pelado.jpg'),
 ('11111111', 'Abdeslam Gomez Perez', 'abdesGo', '123', 987769009, 'abdesGo@gmail.com', 'calle Toronto 301 - Chacarilla', '../otros recursos/USUARIOS/cap1.png'),
-('11112222', 'Luisa Martínez', 'luisam', 'luisapass', 1122334455, 'luisa@example.com', 'Calle de los Pájaros 789', 'luisa.jpg'),
-('33334444', 'Andrés Ramírez', 'andresr', 'andres123', 3344556677, 'andres@example.com', 'Avenida de las Flores 456', 'andres.jpg'),
-('55556666', 'Sofía Pérez', 'sofiap', 'sofiapass', 5566778899, 'sofia@example.com', 'Calle de las Palmeras 123', 'sofia.jpg'),
-('77778888', 'Miguel González', 'miguelg', 'miguelpass', 7788990011, 'miguel@example.com', 'Avenida de los Ríos 234', 'miguel.jpg'),
-('99990000', 'Valentina López', 'valentinal', 'valentina123', 9900112233, 'valentina@example.com', 'Calle de las Estrellas 567', 'valentina.jpg'),
-('12121212', 'Joaquín Sánchez', 'joaquins', 'joaquinspass', 1212123456, 'joaquin@example.com', 'Avenida de las Montañas 890', 'joaquin.jpg'),
-('34343434', 'Camila Rodríguez', 'camilar', 'camilapass', 3434345678, 'camila@example.com', 'Calle de los Bosques 345', 'camila.jpg'),
-('56565656', 'Diego Fernández', 'diegof', 'diegofpass', 5656567890, 'diego@example.com', 'Avenida de los Lagos 456', 'diego.jpg'),
-('78787878', 'Isabella Pérez', 'isabellap', 'isabella123', 7878790012, 'isabella@example.com', 'Calle de los Ríos 789', 'isabella.jpg'),
-('90909090', 'Daniel Martínez', 'danield', 'danielpass', 9090912234, 'daniel@example.com', 'Avenida de las Playas 123', 'daniel.jpg'),
-('12345678', 'Juan Pérez', 'juanperez', 'password123', 987654321, 'juan@example.com', 'Calle Principal 123', 'juan.jpg'),
-('87654321', 'María García', 'mariagarcia', 'maria1234', 123456789, 'maria@example.com', 'Avenida Secundaria 456', 'maria.jpg'),
-('98765432', 'Carlos Rodríguez', 'carlosr', 'qwerty', 456789123, 'carlos@example.com', 'Calle Nueva 789', 'carlos.jpg'),
-('23456789', 'Laura González', 'laurag', 'laurapass', 789123456, 'laura@example.com', 'Avenida Principal 567', 'laura.jpg'),
-('34567890', 'Pedro López', 'pedrolopez', 'password456', 345678912, 'pedro@example.com', 'Calle Secundaria 890', 'pedro.jpg'),
-('65432109', 'Ana Martínez', 'anam', 'ana123', 210987654, 'ana@example.com', 'Avenida Nueva 234', 'ana.jpg'),
-('43210987', 'Javier Sánchez', 'javiers', 'javipass', 109876543, 'javier@example.com', 'Calle Principal 567', 'javier.jpg'),
-('76543210', 'Sara Fernández', 'saraf', 'sara456', 765432109, 'sara@example.com', 'Avenida Secundaria 890', 'sara.jpg'),
-('54321098', 'Manuel Pérez', 'manuelp', 'password789', 432109876, 'manuel@example.com', 'Calle Nueva 123', 'manuel.jpg'),
-('89012345', 'Elena Rodríguez', 'elenar', 'elenapass', 901234567, 'elena@example.com', 'Avenida Principal 456', 'elena.jpg');
 
 
 INSERT INTO proveedor VALUES('P0001','BACKUS (Cristal)','12345678891');
@@ -382,3 +373,22 @@ INSERT INTO vehiculo (`vec_cod`, `vec_placa`, `vec_marca`, `vec_soat`, `con_cod`
 ('V0005', 'JKL345', 'Chevrolet Malibu', '2023-06-05', 'C0005');
 
 
+DELIMITER @@
+DROP PROCEDURE IF EXISTS SPdetalle @@
+CREATE PROCEDURE SPdetalle(fac CHAR(5), coda char(5),  can int)
+BEGIN
+insert into fac_deta values (fac,coda, can);
+update bebida set beb_stk= beb_stk - can where beb_cod=coda;
+END@@
+
+DROP PROCEDURE IF EXISTS SPFACTURA @@
+CREATE PROCEDURE SPFACTURA(in codc char(5),in tot numeric(8,1))
+BEGIN
+declare nro int;
+declare fac char(5);
+select ifnull(max(nrofactura),0) + 1  from fac_cabe into nro;
+set fac = lpad(nro,5,'0');
+insert into fac_cabe values (fac,current_date(),codc,tot);
+select fac;
+END@@
+DELIMITER ;

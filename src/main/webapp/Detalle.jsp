@@ -17,6 +17,8 @@
         <title>Document</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
         <link rel="stylesheet" href="css/style.css">
+        <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
     </head>
     <body>
         <!--HEADER-->
@@ -64,8 +66,20 @@
         function valida() {
             sk = <%=ar.getStock()%>;
             can = Number(fr.cantidad.value);
+            if (can === 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Ingrese una cantidad mayor a 0!',
+                })
+                return
+            }
             if (sk < can) {
-                alert("stock no disponible");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'La cantidad ingresada es mayor al stock!',
+                })
                 return;
             }
             fr.submit();

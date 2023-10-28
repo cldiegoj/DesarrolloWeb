@@ -33,6 +33,9 @@ public class control extends HttpServlet {
         if (op.equals("4")) {
             EliminarBebidaCarrito(request, response);
         }
+        if (op.equals("5")) {
+            GrabarFactura(request, response);
+        }
     }
 
     private void listarProductosPorCategoria(HttpServletRequest request, HttpServletResponse response)
@@ -75,24 +78,57 @@ public class control extends HttpServlet {
         } else {
             lista = (ArrayList<Compra>) ses.getAttribute("canasta");
         }
-        lista.add(cp);
+        boolean sw = false;//para buscar un item 
+        for (Compra x : lista) {
+            if (x.getCod().equals(cod)) {
+                sw = true;
+                break;
+            }
+        }
+        if (!sw) {
+            lista.add(cp);
+        }
         ses.setAttribute("canasta", lista);
 
         String pag = "Compra.jsp";
         request.getRequestDispatcher(pag).forward(request, response);
     }
-    
+
     private void EliminarBebidaCarrito(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String cod = request.getParameter("cod");
         int indice = Integer.parseInt(request.getParameter("indice"));
-        
+
         HttpSession ses = request.getSession();
-        List<Compra> lista = (ArrayList<Compra>)ses.getAttribute("canasta");
-        
+        List<Compra> lista = (ArrayList<Compra>) ses.getAttribute("canasta");
+
         lista.remove(indice);
         ses.setAttribute("canasta", lista);
         String pag = "Compra.jsp";
+        request.getRequestDispatcher(pag).forward(request, response);
+    }
+
+    private void GrabarFactura(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession ses = request.getSession();
+        List<Compra> lista = (ArrayList<Compra>) ses.getAttribute("canasta");
+        Usuario cli = (Usuario) ses.getAttribute("estado");
+        String fac = negocio.grabaFac(cli.getCod(), lista);
+        double sm = 0;
+        String ape = cli.getApe()+ "," + cli.getNom();
+        for (Compra c : lista) {
+            sm = sm + c.total();
+        }
+        request.setAttribute("factura", fac);
+        request.setAttribute("nombre", ape);
+        request.setAttribute("total", sm);
+        ses.setAttribute("canasta", null);
+        /*String cad="Apellido y Nombre:"+ape;
+        cad+="<br> Factura generada :"+fac;
+        cad+="<br> Total a pagar :"+sm;
+        response.sendRedirect("qrimage?texto="+cad);
+         */
+        String pag = "/Resumen.jsp";
         request.getRequestDispatcher(pag).forward(request, response);
     }
 

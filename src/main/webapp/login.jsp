@@ -1,3 +1,4 @@
+<%@page import="Modelo.Usuario"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -15,8 +16,9 @@
         </header>
 
         <%
-            String n = (String) session.getAttribute("estado");
-            
+            HttpSession ses = request.getSession();
+            Usuario n = (Usuario) ses.getAttribute("estado");
+
             if (n != null) {
                 request.getRequestDispatcher("/Principal.jsp").forward(request, response);
             };
@@ -45,6 +47,12 @@
                                         <input type="submit" class="btn btn-primary">
                                     </div>
                                     <label>¿Todavía no te has registrado?</label><a href="Registrar.jsp" class="card-link">Regístrate</a>
+                                    <%
+                                        String x = (String) request.getAttribute("mensaje");
+                                        if (x != null){
+                                            out.print("<br><label>" + x + "</label>");
+                                        }
+                                    %>
                                 </form>
                             </div>
                         </div>

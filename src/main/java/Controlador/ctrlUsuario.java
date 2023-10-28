@@ -28,12 +28,12 @@ public class ctrlUsuario extends HttpServlet {
     protected void adicionUsuario(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
       Usuario u=new Usuario();
-      u.setApelnom(request.getParameter("apelnom"));
-      u.setUsrname(request.getParameter("usrname"));
+      u.setNom(request.getParameter("nombres"));
+      u.setApe(request.getParameter("apellidos"));
+      u.setUsr(request.getParameter("usrname"));
       u.setPass(request.getParameter("pass"));
-      u.setDni(request.getParameter("dni"));
-      u.setCorreo(request.getParameter("correo"));
-      u.setTelef(Integer.parseInt(request.getParameter("telef")));
+      u.setCor(request.getParameter("correo"));
+      u.setTel(Integer.parseInt(request.getParameter("telef")));
       u.setDir(request.getParameter("dir"));
       u.setFoto(request.getParameter("foto"));
       obj.adicion(u);
@@ -47,24 +47,26 @@ public class ctrlUsuario extends HttpServlet {
         String clave=request.getParameter("pass");
         Usuario p=obj.login(user, clave);
         String pag="";
+        String mensaje="";
         if(p==null){
-            pag="/Principal.jsp";
+            //Si no existen las credenciales te regresa al Login e imprime mensaje de error
+            mensaje = "Nombre de usuario o contraseña incorrecta";
+            request.setAttribute("mensaje", mensaje);
+            pag="/login.jsp";
+            request.getRequestDispatcher(pag).forward(request, response);
         }else{
             //Se activa la sesion
-            String dni=p.getDni();
             HttpSession session=request.getSession();
-            session.setAttribute("usuario",user);
-            session.setAttribute("dni", dni);
-            session.setAttribute("estado", "activo");
-            pag="/Categoria.jsp";
+            session.setAttribute("estado", p);
+            pag="/Principal.jsp";
+            request.getRequestDispatcher(pag).forward(request, response);
         }
-        request.getRequestDispatcher(pag).forward(request, response);
      }
     
     protected void cerrar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session=request.getSession();
-        session.setAttribute("estado", "inactivo");
+        session.setAttribute("estado", null);
         String pag="/Principal.jsp";
         
         request.getRequestDispatcher(pag).forward(request, response);

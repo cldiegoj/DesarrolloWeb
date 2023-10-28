@@ -1,19 +1,17 @@
-<%@ page import="java.util.*" %>
-<%@ page import="Modelo.Compra" %> <!-- Asegúrate de que la ubicación sea correcta -->
-<%@ page import="ModeloDAO.Negocio" %> <!-- Asegúrate de que la ubicación sea correcta -->
+<%@page import="Modelo.Compra"%>
+<%@page import="java.util.*"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="Modelo.*,ModeloDAO.Negocio"%>
 
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE,edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>DETALLE</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <!--HEADER-->
         <header>
             <%@include file="header_footer/Header.jsp" %>
             <!--TAMBIEN PRODUCTOS-->
@@ -28,37 +26,33 @@
         <%
             HttpSession ses = request.getSession();
             List<Compra> lista = (ArrayList<Compra>) ses.getAttribute("canasta");
+            Usuario cli = (Usuario) ses.getAttribute("estado");
+            String apenom = cli.getApe() + "," + cli.getNom() ;
         %>
     <center>
-        <h2 class="textoxd">Lista de Compras</h2><br>
-        <a href="Categoria.jsp">Seguir Comprando</a>&nbsp;&nbsp;&nbsp;
-        <a href="Confirma.jsp">Hacer efectiva la Compra</a>&nbsp;&nbsp;&nbsp;<br><br>
-        <table class="table table-hover" border="1" cellspacing="15" cellpadding="15">
+        <h2>Lista de Compras del cliente: <%=apenom%></h2><br>
+        <a href="control?opc=5" class="btn btn-success">Grabar Factura</a>&nbsp;&nbsp;&nbsp;
+        <a href="control?opc=7" class="btn btn-success">Cancelar la compra</a>&nbsp;&nbsp;&nbsp;<br><br>
+        <table class="table table-hover">
             <thead>
-                <tr class="textoxd">
-                    <td>Codigo<td>Descripcion<td>Precio<td>Cantidad<td>Total<td>Foto<td>Eliminar
+                <tr class="text-white bg-dark textoxd">
+                    <th>Codigo<td>Descripcion<th>Precio<th>Cantidad<th>Total
             </thead>
             <%
                 double acu = 0;
-                int contador = 0;
                 for (Compra x : lista) {
                     acu = acu + x.total();
                     out.print("<tr class='textoxd'><td>" + x.getCod() + "<td>" + x.getNom() + "<td>" + x.getPrecio() + "<td>" + x.getCantidad() + "<td>" + x.total());
+                }
             %>
-            <td><img src="imagenes/Bebidas/<%=x.getFoto()%>" width="80" height="70">
-                <%
-                    out.print("<td> <a href =control?opc=4&cod=" + x.getCod() + "&indice=" + contador + ">Eliminar");
-                        contador++;
-                    }
-                %>   
             <tr class="textoxd"><td><b>Total de Compra:</b><td><td><td><td><%=acu%>
         </table>
-    </center>
-
+    </center>  
     <section>
         <footer class="footer container">
             <%@include file="header_footer/Footer.jsp" %>
         </footer>
     </section>
+
 </body>
 </html>

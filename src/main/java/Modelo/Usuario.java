@@ -1,39 +1,52 @@
 package Modelo;
+
 public class Usuario {
-    private String dni;
-    private String apelnom;
-    private String usrname;
+
+    private String cod;
+    private String nom;
+    private String ape;
+    private String usr;
     private String pass;
-    private int telef;
-    private String correo;
+    private int tel;
+    private String cor;
     private String dir;
     private String foto;
 
     public Usuario() {
     }
+    
+    
 
-    public String getDni() {
-        return dni;
+    public String getCod() {
+        return cod;
     }
 
-    public void setDni(String dni) {
-        this.dni = dni;
+    public void setCod(String cod) {
+        this.cod = cod;
     }
 
-    public String getApelnom() {
-        return apelnom;
+    public String getNom() {
+        return nom;
     }
 
-    public void setApelnom(String apelnom) {
-        this.apelnom = apelnom;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
-    public String getUsrname() {
-        return usrname;
+    public String getApe() {
+        return ape;
     }
 
-    public void setUsrname(String usrname) {
-        this.usrname = usrname;
+    public void setApe(String ape) {
+        this.ape = ape;
+    }
+
+    public String getUsr() {
+        return usr;
+    }
+
+    public void setUsr(String usr) {
+        this.usr = usr;
     }
 
     public String getPass() {
@@ -44,20 +57,20 @@ public class Usuario {
         this.pass = pass;
     }
 
-    public int getTelef() {
-        return telef;
+    public int getTel() {
+        return tel;
     }
 
-    public void setTelef(int telef) {
-        this.telef = telef;
+    public void setTel(int tel) {
+        this.tel = tel;
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getCor() {
+        return cor;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setCor(String cor) {
+        this.cor = cor;
     }
 
     public String getDir() {
@@ -75,6 +88,5 @@ public class Usuario {
     public void setFoto(String foto) {
         this.foto = foto;
     }
-    
-    
+
 }

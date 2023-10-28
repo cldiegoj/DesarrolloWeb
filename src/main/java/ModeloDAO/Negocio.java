@@ -12,6 +12,7 @@ import java.util.List;
 import Modelo.*;
 import util.MySQLConexion;
 import interfaces.Itienda;
+import java.sql.CallableStatement;
 
 public class Negocio implements Itienda {
 
@@ -101,46 +102,35 @@ public class Negocio implements Itienda {
         return bebida;
     }
 
-    @Override
-    public Cliente busCli(String usr, String pas) {
-        Connection cn = MySQLConexion.getConexion();
-        Cliente cliente = null;
-        try {
-            String sql = "SELECT Apellidos, Nombres FROM clientes WHERE idcliente=? AND Password=?";
-            PreparedStatement st = cn.prepareStatement(sql);
-            st.setString(1, usr);
-            st.setString(2, pas);
-            ResultSet rs = st.executeQuery();
-            if (rs.next()) {
-                cliente = new Cliente();
-                cliente.setCodc(usr);
-                cliente.setApe(rs.getString(1));
-                cliente.setNom(rs.getString(2));
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        } finally {
-            try {
-                cn.close();
-            } catch (Exception ex2) {
-            }
-        }
-        return cliente;
-    }
+    
 
     @Override
     public String grabaFac(String codc, List<Compra> lista) {
         String fac = "";
         double tot = 0;
-        for (Compra compra : lista) {
-            tot = tot + compra.total();
-        }
-        Connection cn = MySQLConexion.getConexion();
-        try {
-            // Lógica para grabar la factura en la base de datos
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        for(Compra x: lista){
+            tot = tot+x.total();
+        }    
+            Connection cn = MySQLConexion.getConexion();
+            try{
+                CallableStatement st = cn.prepareCall("{CALL SPFACTURA(?,?)}");
+                    st.setString(1, codc);
+                    st.setDouble(2, tot);
+                    ResultSet rs = st.executeQuery();
+                    rs.next();
+                    fac = rs.getString(1);
+
+                    String sql = "{CALL SPdetalle(?,?,?)}";
+                CallableStatement st2 = cn.prepareCall(sql);
+                    for(Compra x: lista){
+                        st2.setString(1, fac);
+                        st2.setString(2, x.getCod());
+                        st2.setInt(3,x.getCantidad());
+                        st2.executeUpdate();
+                    }
+            }catch(Exception ex){
+                ex.printStackTrace();
+            }
         return fac;
     }
 }
