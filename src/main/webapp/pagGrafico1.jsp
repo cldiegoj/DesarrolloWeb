@@ -8,10 +8,13 @@
     </head>
     <body>
         <h1>Grafico de ventas</h1>
-        <form action="Grafico1.jsp" target="zona">
-            <input type="radio" name="op" value="bar" onclick="submit()">Barras
-            <input type="radio" name="op" value="pie" onclick="submit()">Circulo
-            <input type="radio" name="op" value="line" onclick="submit()" >Lineal
+        <form action="Grafico2.jsp" target="zona">
+            Ingrese año:<input name="tan" required>
+            <input type="submit">
+      
+            <input type="radio" name="opc" value="bar" onclick="submit()">Barras
+            <input type="radio" name="opc" value="pie" onclick="submit()">Circulo
+            <input type="radio" name="opc" value="line" onclick="submit()" >Lineal
             <br>
         </form>
         <iframe name="zona" width="100%" height="500"></iframe>    

@@ -133,4 +133,32 @@ public class Negocio implements Itienda {
             }
         return fac;
     }
+    
+    
+    // FILTRO DE DATOS DE FACTURAS (VENTAS) PARA LA APLICACION DE GRAFICAS
+    public List<Ventas_graf>listMes(int a) {
+        List<Ventas_graf> lis = new ArrayList<>();
+            Connection cn = MySQLConexion.getConexion();
+            try{
+                String sql = "{call spventas(?)}"; // aca varias segun el nombre
+                                                   // en la bd donde de guarde las ventas
+                
+                CallableStatement st = cn.prepareCall(sql);
+                st.setInt(1, a);
+                ResultSet rs = st.executeQuery();
+                  while(rs.next()){
+                    Ventas_graf ve = new Ventas_graf();
+                    ve.setMes(rs.getInt(1));
+                    ve.setCantidad(rs.getInt(2));
+                    ve.setTotal(rs.getDouble(3));
+                    }
+            }catch(Exception ex){
+                ex.printStackTrace();
+            }
+       return lis;
+    }
+
+
+    
+    
 }

@@ -123,11 +123,11 @@ public class control extends HttpServlet {
         request.setAttribute("nombre", ape);
         request.setAttribute("total", sm);
         ses.setAttribute("canasta", null);
-        /*String cad="Apellido y Nombre:"+ape;
+        String cad="Apellido y Nombre:"+ape;
         cad+="<br> Factura generada :"+fac;
         cad+="<br> Total a pagar :"+sm;
         response.sendRedirect("qrimage?texto="+cad);
-         */
+         
         String pag = "/Resumen.jsp";
         request.getRequestDispatcher(pag).forward(request, response);
     }
