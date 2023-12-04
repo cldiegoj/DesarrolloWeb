@@ -2,9 +2,7 @@ DROP DATABASE IF EXISTS licoreria2;
 CREATE DATABASE licoreria2;
 USE licoreria2;
 
---
--- Estructura de tabla para la tabla `bebida`
---
+
 
 CREATE TABLE `bebida` (
   `beb_cod` char(5) NOT NULL PRIMARY KEY,
@@ -17,9 +15,7 @@ CREATE TABLE `bebida` (
   `pro_cod` char(5) NOT NULL
 );
 
---
--- Estructura de tabla para la tabla `proveedor`
---
+
 
 CREATE TABLE `proveedor` (
   `pro_cod` char(5) NOT NULL PRIMARY KEY,
@@ -27,9 +23,7 @@ CREATE TABLE `proveedor` (
   `pro_ruc` char(11) NOT NULL
 );
 
---
--- Estructura de tabla para la tabla `categoria`
---
+
 
 CREATE TABLE `categoria` (
   `cat_cod` char(5) NOT NULL PRIMARY KEY,
@@ -38,9 +32,6 @@ CREATE TABLE `categoria` (
   `cat_img` varchar(60) NOT NULL
 );
 
---
--- Estructura de tabla para la tabla `factura cabecera`
---
 
 CREATE TABLE `fac_cabe` (
   `fac_num` char(5) NOT NULL PRIMARY KEY,
@@ -50,9 +41,7 @@ CREATE TABLE `fac_cabe` (
   `vec_cod` char(5) NOT NULL
 );
 
---
--- Estructura de tabla para la tabla `factura detalle`
---
+
 
 CREATE TABLE `fac_deta` (
   `fac_num` char(5) NOT NULL PRIMARY KEY,
@@ -60,9 +49,7 @@ CREATE TABLE `fac_deta` (
   `beb_can` int NOT NULL
 );
 
---
--- Estructura de tabla para la tabla `usuario`
---
+
 
 CREATE TABLE `usuario` (
   `id_usuario` char(5) NOT NULL PRIMARY KEY,
@@ -76,10 +63,6 @@ CREATE TABLE `usuario` (
   `categoria` int(1) NOT NULL
 );
 
---
--- Estructura de tabla para la tabla `reclamos`
---
-
 CREATE TABLE `reclamos` (
   `rec_cod` char(5) NOT NULL PRIMARY KEY,
   `id_usuario` varchar(8) NOT NULL,
@@ -90,24 +73,20 @@ CREATE TABLE `reclamos` (
   `hora` time NOT NULL
 );
 
---
--- Estructura de tabla para la tabla `vehiculo`
---
+
 
 CREATE TABLE `vehiculo` (
   `vec_cod` char(5) NOT NULL PRIMARY KEY,
   `vec_placa` varchar(7) NOT NULL,
   `vec_marca` varchar(45) NOT NULL,
   `vec_soat` date NOT NULL,
-  `con_cod` char(5) NOT NULL
+  `con_cod` int
 );
 
---
--- Estructura de tabla para la tabla `conductor`
---
+
 
 CREATE TABLE `conductor` (
-  `con_cod` char(5) NOT NULL PRIMARY KEY,
+  `con_cod` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `con_nom` varchar(45) NOT NULL,
   `con_ape` varchar(45) NOT NULL,
   `con_lic` varchar(10) NOT NULL,
@@ -127,8 +106,9 @@ ADD CONSTRAINT `fk_facdeta_faccabe` FOREIGN KEY (`fac_num`) REFERENCES `fac_cabe
 ALTER TABLE `fac_deta`
 ADD CONSTRAINT `fk_facdeta_bebida` FOREIGN KEY (`beb_cod`) REFERENCES `bebida` (`beb_cod`);
 
-ALTER TABLE `reclamos`
-ADD CONSTRAINT `fk_reclamos_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario``);
+ALTER TABLE `reclamos` ADD CONSTRAINT `fk_reclamos_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`);
+
+
 
 ALTER TABLE `fac_cabe`
 ADD CONSTRAINT `fk_faccabe_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`);
@@ -137,7 +117,7 @@ ALTER TABLE `fac_cabe`
 ADD CONSTRAINT `fk_faccabe_vehiculo` FOREIGN KEY (`vec_cod`) REFERENCES `vehiculo` (`vec_cod`);
 
 ALTER TABLE `vehiculo`
-ADD CONSTRAINT `fk_vehiculo_conductor` FOREIGN KEY (`con_cod`) REFERENCES `conductor` (`con_cod`);
+ADD CONSTRAINT `fk_vehiculo_conductor` FOREIGN KEY (`con_cod`) REFERENCES `conductor` (`con_cod`) ON DELETE CASCADE;
 
 
 --
@@ -156,21 +136,9 @@ INSERT INTO categoria VALUES('C0009','Piscos','Aguardiente obtenido de destilaci
 INSERT INTO categoria VALUES('C0010','Otros Licores','Otras bebidas alcoholicas','C0010');
 INSERT INTO categoria VALUES('C0011','Extras','Bebidas alcoholicas extras','C0011');
 
-CREATE TABLE `usuario` (
-  `id_usuario` char(5) NOT NULL PRIMARY KEY,
-  `dni` varchar(8) NOT NULL,
-  `apelnom` varchar(45) NOT NULL,
-  `usrname` varchar(45) NOT NULL,
-  `pass` varchar(45) NOT NULL,
-  `telef` int(11) NOT NULL,
-  `correo` varchar(45) NOT NULL,
-  `dir` varchar(45) NOT NULL,
-  `categoria` int(1) NOT NULL
-);
-
 INSERT INTO `usuario` (`id_usuario`, `dni`, `apelnom`, `usrname`, `pass`, `telef`, `correo`, `dir`, `categoria`) VALUES
-('04427715', 'Juancholagarto', 'jl', '1111', 1977, 'aaaa@gmail.com', 'aaaa', 'pelado.jpg'),
-('11111111', 'Abdeslam Gomez Perez', 'abdesGo', '123', 987769009, 'abdesGo@gmail.com', 'calle Toronto 301 - Chacarilla', '../otros recursos/USUARIOS/cap1.png'),
+('04427715', 'Juancholagarto', 'jl', '1111', '1977', 'aaaa@gmail.com', 'aaaa', 'pelado.jpg', 1),
+('11111111', 'Abdeslam Gomez Perez', 'abdesGo', '123', '987769009', 'abdesGo@gmail.com', 'calle Toronto 301 - Chacarilla', '../otros recursos/USUARIOS/cap1.png',1);
 
 
 INSERT INTO proveedor VALUES('P0001','BACKUS (Cristal)','12345678891');
@@ -334,43 +302,43 @@ INSERT INTO bebida (`beb_cod`, `beb_nom`, `beb_des`, `beb_pre`, `beb_stk`, `beb_
 
 -- Conductor 1
 INSERT INTO conductor (`con_cod`, `con_nom`, `con_ape`, `con_lic`, `con_foto`, `con_edad`) VALUES
-('C0001', 'Carlos', 'Pérez', 'LIC12345', 'carlos_foto.jpg', 32);
+('1', 'Carlos', 'Pérez', 'LIC12345', 'carlos_foto.jpg', 32);
 
 -- Conductor 2
 INSERT INTO conductor (`con_cod`, `con_nom`, `con_ape`, `con_lic`, `con_foto`, `con_edad`) VALUES
-('C0002', 'Luisa', 'Gómez', 'LIC67890', 'luisa_foto.jpg', 28);
+('2', 'Luisa', 'Gómez', 'LIC67890', 'luisa_foto.jpg', 28);
 
 -- Conductor 3
 INSERT INTO conductor (`con_cod`, `con_nom`, `con_ape`, `con_lic`, `con_foto`, `con_edad`) VALUES
-('C0003', 'Ana', 'Martínez', 'LIC23456', 'ana_foto.jpg', 35);
+('3', 'Ana', 'Martínez', 'LIC23456', 'ana_foto.jpg', 35);
 
 -- Conductor 4
 INSERT INTO conductor (`con_cod`, `con_nom`, `con_ape`, `con_lic`, `con_foto`, `con_edad`) VALUES
-('C0004', 'Javier', 'Sánchez', 'LIC78901', 'javier_foto.jpg', 30);
+('4', 'Javier', 'Sánchez', 'LIC78901', 'javier_foto.jpg', 30);
 
 -- Conductor 5
 INSERT INTO conductor (`con_cod`, `con_nom`, `con_ape`, `con_lic`, `con_foto`, `con_edad`) VALUES
-('C0005', 'Sara', 'Fernández', 'LIC34567', 'sara_foto.jpg', 33);
+('5', 'Sara', 'Fernández', 'LIC34567', 'sara_foto.jpg', 33);
 
 -- Vehículo 1
 INSERT INTO vehiculo (`vec_cod`, `vec_placa`, `vec_marca`, `vec_soat`, `con_cod`) VALUES
-('V0001', 'ABC123', 'Toyota Corolla', '2023-02-15', 'C0001');
+('V0001', 'ABC123', 'Toyota Corolla', '2023-02-15', '1');
 
 -- Vehículo 2
 INSERT INTO vehiculo (`vec_cod`, `vec_placa`, `vec_marca`, `vec_soat`, `con_cod`) VALUES
-('V0002', 'XYZ456', 'Honda Civic', '2023-03-20', 'C0002');
+('V0002', 'XYZ456', 'Honda Civic', '2023-03-20', '2');
 
 -- Vehículo 3
 INSERT INTO vehiculo (`vec_cod`, `vec_placa`, `vec_marca`, `vec_soat`, `con_cod`) VALUES
-('V0003', 'DEF789', 'Ford Escape', '2023-04-25', 'C0003');
+('V0003', 'DEF789', 'Ford Escape', '2023-04-25', '3');
 
 -- Vehículo 4
 INSERT INTO vehiculo (`vec_cod`, `vec_placa`, `vec_marca`, `vec_soat`, `con_cod`) VALUES
-('V0004', 'GHI012', 'Nissan Altima', '2023-05-30', 'C0004');
+('V0004', 'GHI012', 'Nissan Altima', '2023-05-30', '4');
 
 -- Vehículo 5
 INSERT INTO vehiculo (`vec_cod`, `vec_placa`, `vec_marca`, `vec_soat`, `con_cod`) VALUES
-('V0005', 'JKL345', 'Chevrolet Malibu', '2023-06-05', 'C0005');
+('V0005', 'JKL345', 'Chevrolet Malibu', '2023-06-05', '5');
 
 
 DELIMITER @@
